@@ -23,7 +23,7 @@ firebase.initializeApp(config);
 ReactDOM.render(
   <Provider store={Store}>
     <Router history={browserHistory}>
-
+    
       <Route path='/' component={App}>
         <IndexRoute component={MassTraining} />
         <Route path='/courses' component={Courses} />
