@@ -5,6 +5,7 @@ import {Link} from 'react-router';
 import FBmiddleware from '../middlewares/FBmiddleware.js';
 import {Store} from '../store/store.js'
 import { connect } from 'react-redux';
+import SaylaniLogo from '../../public/assets/images/Saylogo.png' 
 
 
 function mapStateToProp(state){
@@ -37,14 +38,16 @@ export class MassTrainingComp extends React.Component {
     }
 
 regestrationform(){
-    <form>
+   return (
+        <form>
         <label htmlFor="">Batch</label>
-        <input type="text" ref = 'batch' placeholder=" enter your batch"/>
+        <input type="text" ref='batch' placeholder=" enter your batch"/>
         <label htmlFor="">section</label>
-        <input type="text" ref = 'section' placeholder=" Enter your secton "/>
+        <input type="text" ref='section' placeholder=" Enter your secton "/>
         <label htmlFor="">Roll num</label>
-         <input type="text" ref = 'section' placeholder=" Enter your rollnumber "/>
+         <input type="text" ref='section' placeholder=" Enter your rollnumber "/>
     </form>
+   )
 }
 
 
@@ -97,13 +100,14 @@ renderButton(){
         </div>*/}
         <div className="main">
             <header className="bg-img header">
-                <nav style={{backgroundColor: 'yellow'}}>
-                    <div className="container">
-                        <div className="navigation-bar">
-                            <div className="row">   
-                                <div className="col-xs-6">
+                <nav style={{backgroundColor: ''}}>
+                    <div style={{height: '0px'}}  className="container">
+                        <div className="navigation-bar" >
+                            <div className="row" >   
+                                <div  className="col-xs-6">
                                     <div className="logo">
-                                        <a href="index.html"><span className="fa fa-viacoin"></span></a>
+                                        {/*<a href="#"><span className="fa fa-viacoin"></span></a>*/}
+                                        <img height='90px' src={SaylaniLogo} alt="saylaniLogo"/>
                                     </div>
                                 </div>
                                 <div className="col-xs-6 text-right">
@@ -111,8 +115,6 @@ renderButton(){
                                     <Link onClick={this.GMAILsignin.bind(this)} ><img height='45px' src="assets/images/gmail.png" alt="Gmail Logo" title="Login With Gmail"/></Link>
                                     <button className="btn btn-primary" onClick={this.FBlogout.bind(this)} style={{float:"right",fontSize:"10px",marginLeft:"10px" ,borderRadius:"100px",marginTop:"10px",textAlign:"center"}}>Logout</button>                         */}
                                     {this.renderButton()}
- 
-
                                 </div> 
                                 
                             </div>
@@ -125,8 +127,8 @@ renderButton(){
                     <div className="row">
                         <div className="intro-box">
                             <div className="intro">
-                                <h1>Mass Training Program</h1>
-                                <p>Creative digital agency based in US</p>
+                                {/*<h1>Mass Training Program</h1>
+                                <p>Creative digital agency based in US</p>*/}
                                 {/*<a className="btn vira-btn" href="#">Explore us</a>*/}
                             </div>
                         </div>

@@ -1,5 +1,6 @@
 import ActionBundle from '../actions/actionbundle.js';
 import * as firebase from 'firebase'
+
 export default class FBmiddleware {
 
     static facebookLogin() {
@@ -12,6 +13,7 @@ export default class FBmiddleware {
             firebase.auth().signInWithPopup(provider).then(function (result) {
                 // This gives you a Facebook Access Token. You can use it to access the Facebook API.
                 var token = result.credential.accessToken;
+                console.log(token);
                 // The signed-in user info.
                 var user = result.user;
                 //firebase retrieving
@@ -20,11 +22,15 @@ export default class FBmiddleware {
             }).catch(function (error) {
                 // Handle Errors here.
                 var errorCode = error.code;
+                console.log(errorCode);
                 var errorMessage = error.message;
                 // The email of the user's account used.
                 var email = error.email;
+                console.log(email)
                 // The firebase.auth.AuthCredential type that was used.
                 var credential = error.credential;
+                console.log(credential)
+                
                 // ...
                 dispatch(ActionBundle.USER_LOGIN_FAILED(errorMessage));
             });
@@ -54,6 +60,7 @@ export default class FBmiddleware {
             firebase.auth().signInWithPopup(provider).then(function (result) {
                 // This gives you a Google Access Token. You can use it to access the Google API.
                 var token = result.credential.accessToken;
+                console.log(token)
                 // The signed-in user info.
                 var user = result.user;
                 // ...
@@ -61,11 +68,14 @@ export default class FBmiddleware {
             }).catch(function (error) {
                 // Handle Errors here.
                 var errorCode = error.code;
+                 console.log(errorCode)
                 var errorMessage = error.message;
                 // The email of the user's account used.
                 var email = error.email;
+                 console.log(email)
                 // The firebase.auth.AuthCredential type that was used.
                 var credential = error.credential;
+                 console.log(credential)
                 // ...
                  dispatch(ActionBundle.USER_LOGIN_GOOGLE_FAILED(errorMessage))
             });
