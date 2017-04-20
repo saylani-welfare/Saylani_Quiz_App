@@ -1,8 +1,18 @@
 
 import React from 'react';
 import '../style.css';
+import AdminSignInMiddleware from '../../middlewares/adminSignInMiddleware.js';
+import { Store } from '../../store/store.js'
+import { connect } from 'react-redux';
 
-export class Admin extends React.Component {
+function mapDispatchToProp(dispatch) {
+    return {
+        adminLogin: (currentInput)=>{ Store.dispatch(AdminSignInMiddleware.getAdminsData(currentInput)) }
+    }
+}
+
+
+export class AdminComp extends React.Component {
 
     constructor(props) {
         super(props)
@@ -26,7 +36,8 @@ export class Admin extends React.Component {
     }
 
      SignIn() {
-        console.log(this.state);
+        // console.log(this.state);
+        this.props.adminLogin(this.state);
     }
 
     render() {
@@ -50,3 +61,5 @@ export class Admin extends React.Component {
         );
     }
 }
+
+export const Admin = connect(null, mapDispatchToProp)(AdminComp);

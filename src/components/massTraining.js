@@ -5,8 +5,7 @@ import { Link } from 'react-router';
 import FBmiddleware from '../middlewares/FBmiddleware.js';
 import { Store } from '../store/store.js'
 import { connect } from 'react-redux';
-import SaylaniLogo from '../../public/assets/images/Saylogo.png'
-
+import SaylaniLogo from '../../public/assets/images/Saylogo.png';
 
 function mapStateToProp(state) {
     return {
@@ -56,18 +55,21 @@ export class MassTrainingComp extends React.Component {
     }
 
     renderButton() {
+        
         const signup_loginButton = (
             <div>
                 {/*<button onClick={this.FBsignin.bind(this)}>Click</button>*/}
-                <Link onClick={this.FBsignin.bind(this)} style={{ paddingRight: '10px' }} ><img height='45px' src="assets/images/loginWithFB.png" alt=" Facebook Logo" title="Login with facebook" /></Link>
-                <Link onClick={this.GMAILsignin.bind(this)} ><img height='45px' src="assets/images/gmail.png" alt="Gmail Logo" title="Login With Gmail" /></Link>
+                <Link onClick={this.FBsignin.bind(this)} style={{ paddingRight: '10px', cursor: 'pointer' }} ><img height='45px' src="assets/images/loginWithFB.png" alt=" Facebook Logo" title="Login with facebook" /></Link>
+                <Link onClick={this.GMAILsignin.bind(this)} style={{ cursor: 'pointer' }}><img height='45px' src="assets/images/gmail.png" alt="Gmail Logo" title="Login With Gmail" /></Link>
             </div>
         )
+
         const LogoutButton = (
             <div>
                 <button className="btn btn-primary" onClick={this.FBlogout.bind(this)} style={{ float: "right", fontSize: "10px", marginLeft: "10px", borderRadius: "100px", marginTop: "10px", textAlign: "center" }}>Logout</button>
             </div>
         )
+
         if (this.props.userLoginStatus === true) {
             return LogoutButton
         }
@@ -92,9 +94,10 @@ export class MassTrainingComp extends React.Component {
                 </ul>
             </div>
         </div>*/}
+        
                 <div className="main">
-                    <header className="bg-img header">
-                        <nav style={{ backgroundColor: '' }}>
+                    <header style={{ backgroundColor: 'grey' }}>
+                        <nav>
                             <div style={{ height: '0px' }} className="container">
                                 <div className="navigation-bar" >
                                     <div className="row" >
@@ -117,7 +120,7 @@ export class MassTrainingComp extends React.Component {
                             </div>
                         </nav>
 
-                        <div className="container">
+                        <div className="container" style={{ paddingBottom: '20px' }}>
                             <div className="row">
                                 <div className="intro-box">
                                     <div className="intro">
