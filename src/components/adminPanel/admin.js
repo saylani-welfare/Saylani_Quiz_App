@@ -11,7 +11,6 @@ function mapDispatchToProp(dispatch) {
     }
 }
 
-
 export class AdminComp extends React.Component {
 
     constructor(props) {

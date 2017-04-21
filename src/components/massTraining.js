@@ -3,7 +3,8 @@ import React from 'react';
 import './style.css';
 import { Link } from 'react-router';
 import FBmiddleware from '../middlewares/FBmiddleware.js';
-import { Store } from '../store/store.js'
+import GMAILmiddleware from '../middlewares/GMAILmiddleware.js';
+import { Store } from '../store/store.js';
 import { connect } from 'react-redux';
 import SaylaniLogo from '../../public/assets/images/Saylogo.png';
 
@@ -17,7 +18,7 @@ function mapDispatchToProp(dispatch) {
     return {
         facebookLogin: () => { Store.dispatch(FBmiddleware.facebookLogin()) },
         facebookLogout: () => { Store.dispatch(FBmiddleware.fblogout()) },
-        gmailLogin: () => { Store.dispatch(FBmiddleware.googleLogin()) },
+        gmailLogin: () => { Store.dispatch(GMAILmiddleware.googleLogin()) },
 
     }
 }
@@ -44,10 +45,9 @@ export class MassTrainingComp extends React.Component {
 
     FBsignin() {
         this.props.facebookLogin();
-        // console.log('safdasdf');
     }
     FBlogout() {
-        console.log(this.props.facebookLogout())
+        this.props.facebookLogout()
     }
 
     GMAILsignin() {
@@ -55,27 +55,27 @@ export class MassTrainingComp extends React.Component {
     }
 
     renderButton() {
-        
+
         const signup_loginButton = (
-            <div>
-                {/*<button onClick={this.FBsignin.bind(this)}>Click</button>*/}
+            <div>                
                 <Link onClick={this.FBsignin.bind(this)} style={{ paddingRight: '10px', cursor: 'pointer' }} ><img height='45px' src="assets/images/loginWithFB.png" alt=" Facebook Logo" title="Login with facebook" /></Link>
                 <Link onClick={this.GMAILsignin.bind(this)} style={{ cursor: 'pointer' }}><img height='45px' src="assets/images/gmail.png" alt="Gmail Logo" title="Login With Gmail" /></Link>
             </div>
         )
 
-        const LogoutButton = (
-            <div>
+        /*const LogoutButton = (
+            <div>              
                 <button className="btn btn-primary" onClick={this.FBlogout.bind(this)} style={{ float: "right", fontSize: "10px", marginLeft: "10px", borderRadius: "100px", marginTop: "10px", textAlign: "center" }}>Logout</button>
             </div>
-        )
+        )*/
 
-        if (this.props.userLoginStatus === true) {
-            return LogoutButton
-        }
-        else {
+        if (this.props.userLoginStatus === false) {
+            // Store.dispatch(FBmiddleware.studentForm())
+            // browserHistory.push('./studentform');
+            // return LogoutButton
             return signup_loginButton
         }
+        
     }
     render() {
         return (
@@ -94,7 +94,7 @@ export class MassTrainingComp extends React.Component {
                 </ul>
             </div>
         </div>*/}
-        
+
                 <div className="main">
                     <header style={{ backgroundColor: 'grey' }}>
                         <nav>

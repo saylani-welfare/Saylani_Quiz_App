@@ -39,4 +39,18 @@ export default class ActionBundle {
         }
     }
 
+    static STUDENT_INTIAL_DATA(StdData){
+        return {
+            type: 'STUDENT_INTIAL_DATA',
+            studentOBJ: StdData
+        }
+    }
+
+    static STUDENT_MODIFIED_DATA(studentCourse){
+        return {
+            type: 'STUDENT_MODIFIED_DATA',
+            course: studentCourse
+        }
+    }
+
 }

@@ -1,10 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+//** Component **// 
 import { App } from './components/app.js';
 import { MassTraining } from './components/massTraining.js';
 import { Courses } from './components/courses.js';
 import { AdminPanel } from '../src/components/adminPanel/adminPanel.js'
 import { Admin } from '../src/components/adminPanel/admin.js'
+import { StudentForm } from '../src/components/studentForm.js'
+//** Component **// 
+
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
 import { Store } from './store/store.js'
@@ -23,10 +28,11 @@ firebase.initializeApp(config);
 ReactDOM.render(
   <Provider store={Store}>
     <Router history={browserHistory}>
-    
+
       <Route path='/' component={App}>
-        <IndexRoute component={MassTraining} />
-        <Route path='/courses' component={Courses} />
+        <IndexRoute component={StudentForm} />
+        <Route path='./studentform' component={StudentForm} />
+        <Route path='./courses' component={Courses} />
       </Route>
 
       <Route path='/admin' component={AdminPanel}>
