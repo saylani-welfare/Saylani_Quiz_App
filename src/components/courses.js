@@ -20,13 +20,13 @@ function mapDispatchToProp(dispatch) {
 
 export class CoursesComp extends React.Component {
 
-    constructor(props) {
-        super(props)
+    // constructor(props) {
+    //     super(props)
 
-        this.state = {
-            selectedCourse: ''
-        }
-    }
+    //     this.state = {
+    //         selectedCourse: ''
+    //     }
+    // }
 
     itsMyCourse(v) {
 

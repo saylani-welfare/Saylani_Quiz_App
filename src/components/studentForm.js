@@ -26,6 +26,7 @@ export class StudentFormComp extends React.Component {
             studentName: '',
             studentEmail: '',
             studentID: '',
+            studentBatch: ''
         }
     }
 
@@ -47,6 +48,12 @@ export class StudentFormComp extends React.Component {
         })
     }
 
+    HisBatch(e) {
+        this.setState({
+            studentBatch: e.target.value
+        })
+    }
+
     emailValidtion() {
 
         var validationOne = /[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/igm;
@@ -56,7 +63,7 @@ export class StudentFormComp extends React.Component {
         var atpos = x.indexOf("@");
         var dotpos = x.lastIndexOf(".");
 
-        if (!validationOne.test(this.state.studentEmail) && !validationTwo.test(this.state.studentEmail && atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= x.length)) {
+        if (!validationOne.test(this.state.studentEmail) && !validationTwo.test(this.state.studentEmail) && (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= x.length)) {
             return false
         }
         else {
@@ -66,7 +73,7 @@ export class StudentFormComp extends React.Component {
 
     pushMeToCourses() {
 
-        if (this.state.studentName != '' && this.state.studentEmail != '' && this.state.studentID != '') {
+        if (this.state.studentName !== '' && this.state.studentEmail !== '' && this.state.studentID !== '' && this.state.studentBatch !== '') {
 
             if (!isNaN(this.state.studentID) && this.emailValidtion()) {
                 this.props.studentSayllaniData(this.state);
@@ -114,6 +121,16 @@ export class StudentFormComp extends React.Component {
                                 </div>
                             </div>
 
+                            {/*<div className="form-group">
+                                <label htmlFor="email" className="cols-sm-2 control-label">Your Batch</label>
+                                <div className="cols-sm-10">
+                                    <div className="input-group">
+                                        <span className="input-group-addon"><i className="fa fa-graduation-cap" aria-hidden="true"></i></span>
+                                        <input onChange={this.HisEmail.bind(this)} type='email' className="form-control" name="email" id="email" placeholder="Enter your Batch" />
+
+                                    </div>
+                                </div>
+                            </div>*/}
                             <div className="form-group">
                                 <label htmlFor="username" className="cols-sm-2 control-label">Saylani ID</label>
                                 <div className="cols-sm-10">
@@ -122,6 +139,19 @@ export class StudentFormComp extends React.Component {
                                         <input onChange={this.HisID.bind(this)} type="text" className="form-control" name="username" id="username" placeholder="Enter your ID" />
                                     </div>
                                 </div>
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="email" className="cols-sm-2 control-label">Your Batch</label>
+                                <select className="form-control form-control-selectpicker" onClick={this.HisBatch.bind(this)}>
+                                    <option value="0">Select Your batch</option>
+                                    <option value="Batch 1">Batch 1</option>
+                                    <option value="Batch 2">Batch 2</option>
+                                    <option value="Batch 3">Batch 3</option>
+                                    <option value="Batch 4">Batch 4</option>
+                                    <option value="Batch 5">Batch 5</option>
+                                    <option value="Batch 6">Batch 6</option>
+                                </select>
                             </div>
 
                             {/*<div className="form-group">

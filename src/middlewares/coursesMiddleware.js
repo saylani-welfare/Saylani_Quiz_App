@@ -24,8 +24,10 @@ export default class coursesMiddleware {
 
     static sendMyDataToDB(newStd) {
         return (dispatch) => {
+            
+            firebase.database().ref('/ExcelSheet/'+ newStd.Batch + '/' + newStd.Course).push(newStd);
 
-            console.log(newStd);
+            // console.log(newStd);
 
             // dispatch(ActionBundle.STUDENT_MODIFIED_DATA(studentCourse))
         }
