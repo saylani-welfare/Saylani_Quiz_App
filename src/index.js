@@ -5,9 +5,10 @@ import ReactDOM from 'react-dom';
 import { App } from './components/app.js';
 import { MassTraining } from './components/massTraining.js';
 import { Courses } from './components/courses.js';
-import { AdminPanel } from '../src/components/adminPanel/adminPanel.js'
-import { Admin } from '../src/components/adminPanel/admin.js'
 import { StudentForm } from '../src/components/studentForm.js'
+import { Admin } from '../src/components/adminPanel/admin.js'
+import { AdminLogin } from '../src/components/adminPanel/adminLogin.js'
+import { Dashboard } from '../src/components/adminPanel/dashboard.js'
 //** Component **// 
 
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
@@ -35,8 +36,9 @@ ReactDOM.render(
         <Route path='./courses' component={Courses} />
       </Route>
 
-      <Route path='/admin' component={AdminPanel}>
-        <IndexRoute component={Admin} />
+      <Route path='/admin' component={Admin}>
+        <IndexRoute component={AdminLogin} />
+        <Route path='/admin/dashboard' component={Dashboard} />
       </Route>
 
     </Router>

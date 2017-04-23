@@ -53,4 +53,13 @@ export default class ActionBundle {
         }
     }
 
+    static ADMIN_VERIFICATION(adminBoxEmail, adminBoxPass){
+        return {
+            type: 'ADMIN_VERIFICATION',
+            adminEmail: adminBoxEmail,
+            adminPass: adminBoxPass
+
+        }
+    }
+
 }
