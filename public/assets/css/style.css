@@ -343,23 +343,23 @@ section{
 	content: 'CLOSE';
 }
 
-
 /*Home page*/
 .header{
 	background-image: url(../images/1.jpg);
-	height: 100vh;
+	/*height: 100vh;*/
 	position: relative;
-	min-height: 659px;
+	vertical-align: middle;
+	min-height: 150px;
 }
 
 .intro-box{
-	height: 100vh;
+	/*height: 100vh;*/
 	display: table;
 	text-align: center;
 	width: 100%;
 }
 .intro{
-	display: table-cell;
+	/*display: table-cell;*/
 	vertical-align: middle;
 }
 .header h1{
