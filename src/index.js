@@ -31,7 +31,7 @@ ReactDOM.render(
     <Router history={browserHistory}>
 
       <Route path='/' component={App}>
-        <IndexRoute component={StudentForm} />
+        <IndexRoute component={MassTraining} />
         <Route path='./studentform' component={StudentForm} />
         <Route path='./courses' component={Courses} />
       </Route>
