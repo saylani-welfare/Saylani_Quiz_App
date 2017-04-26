@@ -62,4 +62,11 @@ export default class ActionBundle {
         }
     }
 
+    static All_COURSES(list){
+        return {
+            type: 'All_COURSES',
+            listQuizCourse: list 
+        }
+    }
+
 }

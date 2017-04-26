@@ -33,14 +33,14 @@ ReactDOM.render(
   <Provider store={Store}>
     <Router history={browserHistory}>
 
-      <Route path='/' component={App}>
-        <IndexRoute component={MassTraining} />
+      {/*<Route path='/' component={App}>
+        <IndexRoute component={Courses} />
         <Route path='./studentform' component={StudentForm} />
         <Route path='./courses' component={Courses} />
-      </Route>
+      </Route>*/}
 
       <Route path='/admin' component={Admin}>
-        <IndexRoute component={AdminLogin} />
+        <IndexRoute component={Dashboard} />
         <Route path='/admin/dashboard' component={Dashboard} />
         <Route path='/admin/createquiz' component={CreateQuiz} />
         <Route path='/admin/createcourse' component={CreateCourse} />

@@ -19,7 +19,6 @@ function mapDispatchToProp(dispatch) {
         facebookLogin: () => { Store.dispatch(FBmiddleware.facebookLogin()) },
         facebookLogout: () => { Store.dispatch(FBmiddleware.fblogout()) },
         gmailLogin: () => { Store.dispatch(GMAILmiddleware.googleLogin()) },
-
     }
 }
 

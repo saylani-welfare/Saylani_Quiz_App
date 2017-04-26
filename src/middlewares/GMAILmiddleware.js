@@ -18,7 +18,7 @@ export default class GMAILmiddleware {
                 // The signed-in user info.
                 var user = result.user;
                 // ...
-                dispatch(ActionBundle.USER_LOGIN_GOOGLE(user))
+                dispatch(ActionBundle.USER_LOGGED_IN(user))
                 browserHistory.push('./studentform');
             }).catch(function (error) {
                 // Handle Errors here.
@@ -32,7 +32,7 @@ export default class GMAILmiddleware {
                 var credential = error.credential;
                 console.log(credential)
                 // ...
-                dispatch(ActionBundle.USER_LOGIN_GOOGLE_FAILED(errorMessage))
+                dispatch(ActionBundle.USER_LOGIN_FAILED(errorMessage))
             });
         }
     }

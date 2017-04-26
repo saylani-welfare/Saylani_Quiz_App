@@ -5,14 +5,60 @@ import './material-dashboard.css';
 // import '../assetss/css/demo.css';
 // import '../assetss/css/bootstrap.css';
 import { Link } from 'react-router';
-import AdminSignInMiddlware from '../../middlewares/adminSignInMiddleware.js'
+import createCourseMiddleware from '../../middlewares/adminMiddlewares/createCourseMiddleware.js'
 import { Store } from '../../store/store.js';
 import { connect } from 'react-redux';
 
-export class CreateCourse extends React.Component {
+function mapStateToProp(state) {
+    return {
+        listOfAvailableCourse: state.CoursesReducer.allcourseList
+    }
+}
 
+function mapDispatchToProp(dispatch) {
+    return {
+        addACourse: (course) => { Store.dispatch(createCourseMiddleware.createACourse(course)) },
+        fetchCourse: () => { Store.dispatch(createCourseMiddleware.fetchMeCourse()) },
+        deleteThisCourse: (clickedCourse) => { Store.dispatch(createCourseMiddleware.deleteCourse(clickedCourse)) }
+    }
+}
+
+export class CreateCourseComp extends React.Component {
+
+    constructor(props) {
+        super(props)
+
+        this.props.fetchCourse();
+
+        this.state = {
+            courseTextInput: ''
+        }
+    }
+
+    setCourseTextInput(event) {
+        this.setState({
+            courseTextInput: event.target.value
+        })
+    }
+
+    addCourse() {
+        if (this.state.courseTextInput !== '') {
+            this.props.addACourse(this.state.courseTextInput)
+        }
+
+        this.setState({
+            courseTextInput: ''
+        })
+    }
+
+    delete(clickedCourse) {
+        // console.log('del');
+        this.props.deleteThisCourse(clickedCourse)
+    }
 
     render() {
+
+        // console.log(this.props.listOfAvailableCourse);
         return (
             <div className="wrapper">
 
@@ -71,7 +117,7 @@ export class CreateCourse extends React.Component {
                                     <span className="icon-bar"></span>
                                     <span className="icon-bar"></span>
                                 </button>
-                                <a className="navbar-brand" href="#">Create Quiz</a>
+                                <a className="navbar-brand" href="#">Create Course</a>
                             </div>
                             <div className="collapse navbar-collapse">
                                 <ul className="nav navbar-nav navbar-right">
@@ -90,14 +136,14 @@ export class CreateCourse extends React.Component {
                                     </li>
                                 </ul>
 
-                                <form className="navbar-form navbar-right" role="search">
+                                {/*<form className="navbar-form navbar-right" role="search">
                                     <div className="form-group  is-empty">
                                         <input type="text" className="form-control" placeholder="Search" />
                                     </div>
                                     <button type="submit" className="btn btn-white btn-round btn-just-icon">
                                         <i className="material-icons">search</i><div className="ripple-container"></div>
                                     </button>
-                                </form>
+                                </form>*/}
 
                             </div>
                         </div>
@@ -105,7 +151,37 @@ export class CreateCourse extends React.Component {
                     <div className="content">
                         <div className="container-fluid">
 
+                            <div className="container">
+                                <div className="row">
+                                    <div className="col-md-7">
+                                        <div className="card">
+                                            <ul className="nav nav-tabs" role="tablist">
+                                                <li role="presentation" ><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Course list</a></li>
+                                            </ul>
 
+                                            <div className="tab-content">
+                                                <div role="tabpanel" className="tab-pane active" id="home">
+                                                    <div className="form-group  is-empty">
+                                                        <input type="text" className="form-control" onChange={this.setCourseTextInput.bind(this)} placeholder="Course Name" value={this.state.courseTextInput} />
+                                                        <a onClick={this.addCourse.bind(this)} className="btn icon-btn btn-success" ><span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>Add Course</a>
+                                                    </div>
+
+                                                    <div className="panel panel-default widget">
+                                                        <div className="panel-body">
+                                                            <ul className="list-group">
+                                                                {
+                                                                    this.props.listOfAvailableCourse.map((item, key) => { return <li key={key} className="list-group-item">{item}<span style={{ float: 'right', cursor: 'pointer' }}><i onClick={this.delete.bind(this, item)} className="fa fa-trash-o" aria-hidden="true"></i></span></li> })
+                                                                }
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             {/*<div className="row">
                                 <div className="col-lg-3 col-md-6 col-sm-6">
@@ -556,3 +632,5 @@ export class CreateCourse extends React.Component {
         );
     }
 }
+
+export const CreateCourse = connect(mapStateToProp, mapDispatchToProp)(CreateCourseComp)
