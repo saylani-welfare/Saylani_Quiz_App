@@ -9,24 +9,8 @@ import AdminSignInMiddlware from '../../middlewares/adminSignInMiddleware.js'
 import { Store } from '../../store/store.js';
 import { connect } from 'react-redux';
 
-function mapStateToProp(state) {
-    return {
-        ADemail: state.VerifyAdmin.administratorEmail,
-        ADpass: state.VerifyAdmin.administratorPass
-    }
-}
+export class CreateCourse extends React.Component {
 
-function mapDispatchToProp(dispatch) {
-    return {
-        verifyThisAdmin: (hisEmail, hisPass) => { Store.dispatch(AdminSignInMiddlware.verifyThisCurrentAdmin(hisEmail, hisPass)) }
-    }
-}
-
-class DashboardComp extends React.Component {
-
-    componentWillMount() {
-        this.props.verifyThisAdmin(this.props.ADemail, this.props.ADpass)
-    }
 
     render() {
         return (
@@ -42,22 +26,22 @@ class DashboardComp extends React.Component {
 
                     <div className="sidebar-wrapper">
                         <ul className="nav">
-                            <li className="active">
+                            <li>
                                 <Link to={{ pathname: '/admin/dashboard' }}>
                                     <i className="material-icons">dashboard</i>
-                                    <p className="colorrr">Dashboard</p>
+                                    <p>Dashboard</p>
                                 </Link>
                             </li>
                             <li >
                                 <Link to={{ pathname: '/admin/createquiz' }}>
                                     <i className="material-icons">person</i>
-                                    <p>Create Quiz</p>
+                                    <p >Create Quiz</p>
                                 </Link>
                             </li>
-                            <li>
+                            <li className="active">
                                 <Link to={{ pathname: '/admin/createcourse' }}>
                                     <i className="material-icons">content_paste</i>
-                                    <p>Create Course</p>
+                                    <p className="colorrr">Create Course</p>
                                 </Link>
                             </li>
                             <li>
@@ -87,7 +71,7 @@ class DashboardComp extends React.Component {
                                     <span className="icon-bar"></span>
                                     <span className="icon-bar"></span>
                                 </button>
-                                <a className="navbar-brand" href="#">Dashboard</a>
+                                <a className="navbar-brand" href="#">Create Quiz</a>
                             </div>
                             <div className="collapse navbar-collapse">
                                 <ul className="nav navbar-nav navbar-right">
@@ -120,7 +104,10 @@ class DashboardComp extends React.Component {
                     </nav>
                     <div className="content">
                         <div className="container-fluid">
-                            <div className="row">
+
+
+
+                            {/*<div className="row">
                                 <div className="col-lg-3 col-md-6 col-sm-6">
                                     <div className="card card-stats">
                                         <div className="card-header" data-background-color="orange">
@@ -206,9 +193,9 @@ class DashboardComp extends React.Component {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>*/}
 
-                            <div className="row">
+                            {/*<div className="row">
                                 <div className="col-md-4">
                                     <div className="card">
                                         <div className="card-header card-chart" data-background-color="green">
@@ -260,9 +247,9 @@ class DashboardComp extends React.Component {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>*/}
 
-                            <div className="row">
+                            {/*<div className="row">
                                 <div className="col-lg-6 col-md-12">
                                     <div className="card card-nav-tabs">
                                         <div className="card-header" data-background-color="purple">
@@ -484,7 +471,7 @@ class DashboardComp extends React.Component {
                                     </div>
                                 </div>
 
-                                {/*<div className="col-lg-6 col-md-12">
+                                <div className="col-lg-6 col-md-12">
                                     <div className="card">
                                         <div className="card-header" data-background-color="orange">
                                             <h4 className="title">Employees Stats</h4>
@@ -527,12 +514,13 @@ class DashboardComp extends React.Component {
                                             </table>
                                         </div>
                                     </div>
-                                </div>*/}
-                            </div>
+                                </div>
+                            </div>*/}
+
                         </div>
                     </div>
 
-                    <footer className="footer">
+                    {/*<footer className="footer">
                         <div className="container-fluid">
                             <nav className="pull-left">
                                 <ul>
@@ -562,18 +550,9 @@ class DashboardComp extends React.Component {
                                 &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
 					</p>
                         </div>
-                    </footer>
-
-
-
-
+                    </footer>*/}
                 </div>
-
-
-
             </div>
         );
     }
 }
-
-export const Dashboard = connect(mapStateToProp, mapDispatchToProp)(DashboardComp)
