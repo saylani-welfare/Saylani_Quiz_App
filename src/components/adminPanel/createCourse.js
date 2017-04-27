@@ -5,133 +5,60 @@ import './material-dashboard.css';
 // import '../assetss/css/demo.css';
 // import '../assetss/css/bootstrap.css';
 import { Link } from 'react-router';
+import createCourseMiddleware from '../../middlewares/adminMiddlewares/createCourseMiddleware.js'
 import { Store } from '../../store/store.js';
 import { connect } from 'react-redux';
-import createQuizMiddleware from '../../middlewares/adminMiddlewares/createQuizMiddleware.js'
 
 function mapStateToProp(state) {
     return {
-
+        listOfAvailableCourse: state.CoursesReducer.allcourseList
     }
 }
 
 function mapDispatchToProp(dispatch) {
     return {
-        MakeQuiz: (quizName, courseNameforQuiz , wholeQuestions) => { Store.dispatch(createQuizMiddleware.createAQuiz(quizName, courseNameforQuiz , wholeQuestions)) }
+        addACourse: (course) => { Store.dispatch(createCourseMiddleware.createACourse(course)) },
+        fetchCourse: () => { Store.dispatch(createCourseMiddleware.fetchMeCourse()) },
+        deleteThisCourse: (clickedCourse) => { Store.dispatch(createCourseMiddleware.deleteCourse(clickedCourse)) }
     }
 }
 
-export class CreateQuizComp extends React.Component {
+export class CreateCourseComp extends React.Component {
 
     constructor(props) {
         super(props)
 
-        this.individualQuestion = []
-        this.AllQuestions = []
-        this.generateList = []
+        this.props.fetchCourse();
 
         this.state = {
-            question: '',
-            questionOption: '',
-            questionAnswer: '',
-            titleOfQuiz: '',
-            selectedCourse: ''
+            courseTextInput: ''
         }
     }
 
-    quizFormingFinished() {
-        // console.log(this.AllQuestions);
-        this.props.MakeQuiz(this.state.titleOfQuiz , this.state.selectedCourse ,this.AllQuestions);
-    }
-
-    QuizTitle(event) {
-        var v = event.target.value;
-
+    setCourseTextInput(event) {
         this.setState({
-            titleOfQuiz: v
+            courseTextInput: event.target.value
         })
     }
 
-    selectedCourseforQuiz(event) {
-        var v = event.target.value;
-
-        this.setState({
-            selectedCourse: v
-        })
-    }
-
-    SaveQuestion() {
-
-        this.individualQuestion.push(this.state.questionAnswer);
-        this.individualQuestion.push(this.state.question);
-        console.log(this.individualQuestion)
-
-        this.AllQuestions.push(this.individualQuestion);
-
-        this.setState({
-            question: '',
-            questionAnswer: ''
-        })
-        this.generateList = [];
-        this.individualQuestion = [];
-    }
-
-    setQuestion(event) {
-        var v = event.target.value;
-
-        this.setState({
-            question: v
-        })
-    }
-
-    setOption(event) {
-        var v = event.target.value;
-
-        this.setState({
-            questionOption: v
-        })
-    }
-
-    setAnswer(event) {
-        var v = event.target.value;
-
-        this.setState({
-            questionAnswer: v
-        })
-    }
-
-    addOption() {
-
-        if (this.state.questionOption !== '') {
-            this.individualQuestion.push(this.state.questionOption);
-
-            var htmlforOption = (
-
-                <div className="todo-item panel panel-default todo-complete" style={{ backgroundColor: '#f5f5f5' }}>
-                    <div className="panel-heading" style={{ padding: '0px' }}>
-                        <ul className="list-group" style={{ marginTop: '5px', marginBottom: '5px' }}>
-                            <div>
-                                <input type="checkbox" id="checkbox" style={{ marginRight: '5px', marginLeft: '10px' }} value={this.state.questionOption} onClick={this.setAnswer.bind(this)} />
-                                <span>
-                                    {this.state.questionOption}
-                                </span>
-                            </div>
-                        </ul>
-                    </div>
-                </div>
-            )
-
-            this.generateList.push(htmlforOption)
-            this.forceUpdate();
+    addCourse() {
+        if (this.state.courseTextInput !== '') {
+            this.props.addACourse(this.state.courseTextInput)
         }
 
         this.setState({
-            questionOption: '',
+            courseTextInput: ''
         })
+    }
+
+    delete(clickedCourse) {
+        // console.log('del');
+        this.props.deleteThisCourse(clickedCourse)
     }
 
     render() {
 
+        // console.log(this.props.listOfAvailableCourse);
         return (
             <div className="wrapper">
 
@@ -151,16 +78,16 @@ export class CreateQuizComp extends React.Component {
                                     <p>Dashboard</p>
                                 </Link>
                             </li>
-                            <li className="active">
+                            <li >
                                 <Link to={{ pathname: '/admin/createquiz' }}>
                                     <i className="material-icons">person</i>
-                                    <p className="colorrr">Create Quiz</p>
+                                    <p >Create Quiz</p>
                                 </Link>
                             </li>
-                            <li>
-                                <Link to={{ pathname: '/admin/createCourse' }}>
+                            <li className="active">
+                                <Link to={{ pathname: '/admin/createcourse' }}>
                                     <i className="material-icons">content_paste</i>
-                                    <p>Create Course</p>
+                                    <p className="colorrr">Create Course</p>
                                 </Link>
                             </li>
                             <li>
@@ -190,7 +117,7 @@ export class CreateQuizComp extends React.Component {
                                     <span className="icon-bar"></span>
                                     <span className="icon-bar"></span>
                                 </button>
-                                <a className="navbar-brand" href="#">Create Quiz</a>
+                                <a className="navbar-brand" href="#">Create Course</a>
                             </div>
                             <div className="collapse navbar-collapse">
                                 <ul className="nav navbar-nav navbar-right">
@@ -209,75 +136,52 @@ export class CreateQuizComp extends React.Component {
                                     </li>
                                 </ul>
 
-                                <form className="navbar-form navbar-right" role="search">
+                                {/*<form className="navbar-form navbar-right" role="search">
                                     <div className="form-group  is-empty">
                                         <input type="text" className="form-control" placeholder="Search" />
                                     </div>
                                     <button type="submit" className="btn btn-white btn-round btn-just-icon">
                                         <i className="material-icons">search</i><div className="ripple-container"></div>
                                     </button>
-                                </form>
+                                </form>*/}
 
                             </div>
                         </div>
                     </nav>
-
                     <div className="content">
-                        <button type="submit" className="pull-right btn btn-danger" onClick={this.quizFormingFinished.bind(this)}>Finish</button>
                         <div className="container-fluid">
 
-                            <section>
+                            <div className="container">
+                                <div className="row">
+                                    <div className="col-md-7">
+                                        <div className="card">
+                                            <ul className="nav nav-tabs" role="tablist">
+                                                <li role="presentation" ><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Course list</a></li>
+                                            </ul>
 
-                                <div className="content-wrapper">
-
-                                    <div className="table-grid todo">
-                                        <div className="col col-lg">
-                                            <div className="pr-lg">
-                                                <form className="mb-xl">
-                                                    <div className="form-group" style={{ marginTop: '0px' }}>
-                                                        <input type="text" onChange={this.QuizTitle.bind(this)} placeholder="Quiz Title" required="required" className="form-control" />
+                                            <div className="tab-content">
+                                                <div role="tabpanel" className="tab-pane active" id="home">
+                                                    <div className="form-group  is-empty">
+                                                        <input type="text" className="form-control" onChange={this.setCourseTextInput.bind(this)} placeholder="Course Name" value={this.state.courseTextInput} />
+                                                        <a onClick={this.addCourse.bind(this)} className="btn icon-btn btn-success" ><span className="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>Add Course</a>
                                                     </div>
-                                                    <div className="form-group">
-                                                        <select className="form-control form-control-selectpicker" onChange={this.selectedCourseforQuiz.bind(this)}>
-                                                            <option value="0">Select Course</option>
-                                                            <option value="Git">Git</option>
-                                                            <option value="JavaScript">JavaScript</option>
-                                                            <option value="Css">Css</option>
-                                                        </select>
+
+                                                    <div className="panel panel-default widget">
+                                                        <div className="panel-body">
+                                                            <ul className="list-group" style={{marginTop: '0px'}}>
+                                                                {
+                                                                    this.props.listOfAvailableCourse.map((item, key) => { return <li key={key} className="list-group-item">{item}<span style={{ float: 'right', cursor: 'pointer' }}><i onClick={this.delete.bind(this, item)} className="fa fa-trash-o" aria-hidden="true"></i></span></li> })
+                                                                }
+                                                            </ul>
+                                                        </div>
                                                     </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <div className="col todo-item-list">
 
-                                            <div className="btn btn-primary btn-block" style={{ cursor: 'text' }}>Create Question</div>
-                                            <div className="form-group">
-                                                <textarea placeholder="Type a Question" onChange={this.setQuestion.bind(this)} rows="8" className="form-control" value={this.state.question}></textarea>
-                                            </div>
-
-                                            <div className="todo-item panel panel-default todo-complete" style={{ float: 'left', width: '50%' }}>
-                                                <div className="panel-heading">
-                                                    <h4 className="panel-title">
-                                                        <span role="button" data-toggle="collapse-disabled" data-parent="#accordion" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" className="clickable">
-                                                            <span className="todo-title">
-                                                                <input onChange={this.setOption.bind(this)} value={this.state.questionOption} style={{ width: '100%' }} id="todo-item-0" />
-                                                            </span>
-                                                        </span>
-                                                    </h4>
                                                 </div>
                                             </div>
-
-                                            <button type="submit" className="btn btn-primary" onClick={this.addOption.bind(this)}>Add as Option</button>
-                                            <button className="btn btn-primary" style={{ float: 'right' }} onClick={this.SaveQuestion.bind(this)}>Next</button>
-                                            <div style={{ clear: 'both' }} ></div>
-                                            {this.generateList.map((item, index) => { return <div key={index} id="accordion" role="tablist" aria-multiselectable="true" className="panel-group">{item}</div> })}
-
-
-
                                         </div>
                                     </div>
                                 </div>
-                            </section>
+                            </div>
 
                             {/*<div className="row">
                                 <div className="col-lg-3 col-md-6 col-sm-6">
@@ -729,5 +633,4 @@ export class CreateQuizComp extends React.Component {
     }
 }
 
-
-export const CreateQuiz = connect(mapStateToProp, mapDispatchToProp)(CreateQuizComp);
+export const CreateCourse = connect(mapStateToProp, mapDispatchToProp)(CreateCourseComp)

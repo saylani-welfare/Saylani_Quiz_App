@@ -10,6 +10,7 @@ import { Admin } from '../src/components/adminPanel/admin.js'
 import { AdminLogin } from '../src/components/adminPanel/adminLogin.js'
 import { Dashboard } from '../src/components/adminPanel/dashboard.js'
 import { CreateQuiz } from '../src/components/adminPanel/createQuiz.js'
+import { CreateCourse } from '../src/components/adminPanel/createCourse.js'
 
 //** Component **// 
 
@@ -32,16 +33,17 @@ ReactDOM.render(
   <Provider store={Store}>
     <Router history={browserHistory}>
 
-      {/*<Route path='/' component={App}>
+      <Route path='/' component={App}>
         <IndexRoute component={Courses} />
         <Route path='./studentform' component={StudentForm} />
         <Route path='./courses' component={Courses} />
-      </Route>*/}
+      </Route>
 
       <Route path='/admin' component={Admin}>
-        <IndexRoute component={Dashboard} />
+        <IndexRoute component={AdminLogin} />
         <Route path='/admin/dashboard' component={Dashboard} />
         <Route path='/admin/createquiz' component={CreateQuiz} />
+        <Route path='/admin/createCourse' component={CreateCourse} />
       </Route>
 
     </Router>

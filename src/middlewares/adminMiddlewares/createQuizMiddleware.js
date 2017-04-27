@@ -4,10 +4,11 @@ import { browserHistory } from 'react-router';
 
 export default class createQuizMiddleware {
 
-    static createAQuiz(course) {
+    static createAQuiz(quizName, courseNameforQuiz , wholeQuestions) {
         return (dispatch) => {
 
-
+            console.log(quizName, courseNameforQuiz, wholeQuestions)
+            firebase.database().ref('/QuizList/' + courseNameforQuiz+ '/' + quizName).push(wholeQuestions);
         }
     }
 }
