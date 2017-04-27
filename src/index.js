@@ -10,7 +10,6 @@ import { Admin } from '../src/components/adminPanel/admin.js'
 import { AdminLogin } from '../src/components/adminPanel/adminLogin.js'
 import { Dashboard } from '../src/components/adminPanel/dashboard.js'
 import { CreateQuiz } from '../src/components/adminPanel/createQuiz.js'
-import { CreateCourse } from '../src/components/adminPanel/createCourse.js'
 
 //** Component **// 
 
@@ -43,7 +42,6 @@ ReactDOM.render(
         <IndexRoute component={Dashboard} />
         <Route path='/admin/dashboard' component={Dashboard} />
         <Route path='/admin/createquiz' component={CreateQuiz} />
-        <Route path='/admin/createcourse' component={CreateCourse} />
       </Route>
 
     </Router>
