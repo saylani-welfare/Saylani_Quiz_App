@@ -1,7 +1,6 @@
 const passport = require('passport');
 const Administrators = require('../models/administrators')
 const localStrategy = require('passport-local');
-const AdminMiddleware = require('../middlewares/adminMiddleware');
 
 
 const localOptions = {
