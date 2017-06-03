@@ -37,7 +37,7 @@ function routes(app) {
     app.get('/api/getAllBatches', CourseControllers.getAllBatches);
     app.use(ErrMiddleware);
     app.post('/api/addCourse', CourseControllers.addCourse);
-    app.use(ErrMiddleware);
+    app.use(ErrMiddleware)
 
     //API's for Quizes
     
