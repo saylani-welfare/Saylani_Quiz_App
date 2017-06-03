@@ -7,13 +7,7 @@ module.exports = {
         Programs.create(req.body)
             .then(() => { res.send({ success: true }) })
             .catch(next)
-    },
-
-    getAllPrograms(req, res, next) {
-        Programs.find()
-            .then((allPrograms) => { res.send(allPrograms) })
-            .catch(next)
-    }
+    } 
 
 
 }

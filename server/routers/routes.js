@@ -2,6 +2,8 @@
 const authentication = require('../controllers/authentication');
 const programControllers = require('../controllers/programControllers');
 const batchControllers = require('../controllers/batchControllers');
+const CourseControllers = require('../controllers/courseControllers');
+
 
 //middlewares
 const ErrMiddleware = require('../middlewares/errMiddleware');
@@ -24,12 +26,21 @@ function routes(app) {
     //API's for Program
     app.post('/api/addProgram', programControllers.addProgram);
     app.use(ErrMiddleware);
-    app.get('/api/getAllPrograms', programControllers.getAllPrograms);
-    app.use(ErrMiddleware);
 
     //API's for Batches
+    app.get('/api/getAllPrograms', batchControllers.getAllPrograms);
+    app.use(ErrMiddleware);
     app.post('/api/addBatch', batchControllers.addBatch);
     app.use(ErrMiddleware);
+
+    //API's for courses
+    app.get('/api/getAllBatches', CourseControllers.getAllBatches);
+    app.use(ErrMiddleware);
+    app.post('/api/addCourse', CourseControllers.addCourse);
+    app.use(ErrMiddleware);
+
+    //API's for Quizes
+    
 
 }
 
