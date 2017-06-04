@@ -3,6 +3,7 @@ const authentication = require('../controllers/authentication');
 const programControllers = require('../controllers/programControllers');
 const batchControllers = require('../controllers/batchControllers');
 const CourseControllers = require('../controllers/courseControllers');
+const QuizControllers = require('../controllers/quizControllers')
 
 
 //middlewares
@@ -37,10 +38,14 @@ function routes(app) {
     app.get('/api/getAllBatches', CourseControllers.getAllBatches);
     app.use(ErrMiddleware);
     app.post('/api/addCourse', CourseControllers.addCourse);
-    app.use(ErrMiddleware)
+    app.use(ErrMiddleware);
 
     //API's for Quizes
-    
+    app.get("/api/getAllCourses", QuizControllers.getAllCourses);
+    app.use(ErrMiddleware);
+    app.post('/api/makeQuiz', QuizControllers.makeQuiz);
+    app.use(ErrMiddleware);
+
 
 }
 

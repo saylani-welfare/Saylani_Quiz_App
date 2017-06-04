@@ -31,7 +31,7 @@ module.exports = {
                         })
                             .then(() => { res.send({ success: true }) })
                             .catch(next)
-                    }
+                    }                    
                 })
                     .catch(next)
             })

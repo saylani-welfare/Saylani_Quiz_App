@@ -17,12 +17,17 @@ module.exports = {
 
         Programs.findOne({ program: programName }, function (err, founded) {
 
-            Batches.create({
-                batch: batch,
-                program_id: founded._id
-            })
-                .then(() => { res.send({ success: true }) })
-                .catch(next)
+            if (founded) {
+                Batches.create({
+                    batch: batch,
+                    program_id: founded._id
+                })
+                    .then(() => { res.send({ success: true }) })
+                    .catch(next)
+            }
+            else {
+                res.send({ success: false })
+            }
         })
             .catch(next)
     }
