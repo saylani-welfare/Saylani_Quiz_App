@@ -62,10 +62,10 @@ class AdminLoginComp extends React.Component {
 
                 }
             })
-
     }
 
     render() {
+        
         return (
             <div className="container" style={{ marginTop: '60px' }}>
                 <div className="row">

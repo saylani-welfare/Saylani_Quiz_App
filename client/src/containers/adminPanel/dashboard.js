@@ -1,6 +1,7 @@
 
 import React from 'react';
 import '../../../public/assets/css/material-dashboard.css';
+import { persistStore } from 'redux-persist';
 import { Link } from 'react-router';
 import { Store } from '../../store/store.js';
 import { connect } from 'react-redux';
@@ -29,12 +30,24 @@ class DashboardComp extends React.Component {
     }
 
     componentWillMount() {
-        if (this.props.AUTH_TOKEN === '') {
-            browserHistory.push('/admin');
-        }
+
+        persistStore(Store, {}, () => {
+            if (this.props.AUTH_TOKEN === '') {
+                browserHistory.push('/admin');
+                // console.log(this.props.AUTH_TOKEN );
+            }
+        });
     }
 
     render() {
+        // console.log(this.props.AUTH_TOKEN );
+        //cannot come on this page using browser back button
+        (function () {
+            function disableBack() { window.history.forward() }
+            window.onload = disableBack();
+            window.onpageshow = function (evt) { if (evt.persisted) disableBack() }
+        })();
+
         return (
             <div className="wrapper">
 
@@ -55,10 +68,11 @@ class DashboardComp extends React.Component {
                                 </Link>
                             </li>
                             <li >
-                                <Link to={{ pathname: '/admin/createquiz' }}>
-                                    <i className="material-icons">person</i>
-                                    <p>Create Quiz</p>
+                                <Link to={{ pathname: '/admin/createProgram' }}>
+                                    <i className="material-icons">location_on</i>
+                                    <p>Create Program</p>
                                 </Link>
+
                             </li>
                             <li>
                                 <Link to={{ pathname: '/admin/createcourse' }}>
@@ -67,9 +81,9 @@ class DashboardComp extends React.Component {
                                 </Link>
                             </li>
                             <li>
-                                <Link to={{ pathname: '#' }}>
-                                    <i className="material-icons">location_on</i>
-                                    <p>Maps</p>
+                                <Link to={{ pathname: '/admin/createquiz' }}>
+                                    <i className="material-icons">person</i>
+                                    <p>Create Quiz</p>
                                 </Link>
                             </li>
                             <li>

@@ -27,6 +27,8 @@ function routes(app) {
     //API's for Program
     app.post('/api/addProgram', programControllers.addProgram);
     app.use(ErrMiddleware);
+    app.delete('/api/deleteProgram/:id', programControllers.deleteProgram);
+    app.use(ErrMiddleware);
 
     //API's for Batches
     app.get('/api/getAllPrograms', batchControllers.getAllPrograms);
@@ -45,7 +47,6 @@ function routes(app) {
     app.use(ErrMiddleware);
     app.post('/api/makeQuiz', QuizControllers.makeQuiz);
     app.use(ErrMiddleware);
-
 
 }
 

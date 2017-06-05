@@ -7,15 +7,16 @@ import { Provider } from 'react-redux';
 import { Store } from './store/store.js'
 
 //** Student Component **// 
-import { App } from './components/app.js';
-import { MainPage } from './components/mainPage.js';
+import { App } from './containers/app.js';
+import { MainPage } from './containers/mainPage.js';
 
 //** Admin Components **/
-import { Admin } from '../src/components/adminPanel/admin.js'
+import { Admin } from '../src/containers/adminPanel/admin.js'
 import { AdminLogin } from '../src/components/adminPanel/adminLogin.js'
-import { Dashboard } from '../src/components/adminPanel/dashboard.js'
-import { CreateQuiz } from '../src/components/adminPanel/createQuiz.js'
-import { CreateCourse } from '../src/components/adminPanel/createCourse.js'
+import { Dashboard } from '../src/containers/adminPanel/dashboard.js'
+import { CreateQuiz } from '../src/containers/adminPanel/createQuiz.js'
+import { CreateCourse } from '../src/containers/adminPanel/createCourse.js'
+import { CreateProgram } from '../src/containers/adminPanel/createProgram.js'
 
 
 ReactDOM.render(
@@ -29,8 +30,11 @@ ReactDOM.render(
       <Route path='/admin' component={Admin}>
         <IndexRoute component={AdminLogin} />
         <Route path='/admin/dashboard' component={Dashboard} />
-        <Route path='/admin/createquiz' component={CreateQuiz} />
+        <Route path='/admin/createProgram' component={CreateProgram} />
         <Route path='/admin/createCourse' component={CreateCourse} />
+        <Route path='/admin/createquiz' component={CreateQuiz} />
+
+
       </Route>
 
     </Router>

@@ -1,11 +1,12 @@
 
 import React from 'react';
 import '../../../public/assets/css/material-dashboard.css';
+import { persistStore } from 'redux-persist';
 import { Link } from 'react-router';
 import { Store } from '../../store/store.js';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
 import TokenMiddlware from '../../middlewares/adminMiddlewares/tokenMiddleware';
+import { browserHistory } from 'react-router';
 
 
 function mapStateToProps(state) {
@@ -20,19 +21,30 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-class CreateCourseComp extends React.Component {
+class CreateQuizComp extends React.Component {
 
     componentWillMount() {
-        if (this.props.AUTH_TOKEN === '') {
-            browserHistory.push('/admin');
-        }
+        persistStore(Store, {}, () => {
+            if (this.props.AUTH_TOKEN === '') {
+                browserHistory.push('/admin');
+                // console.log(this.props.AUTH_TOKEN );
+            }
+        });
     }
 
     logout() {
         this.props.rmTOKEN();
         browserHistory.push('/admin');
     }
+
     render() {
+
+        //cannot come on this page using browser back button
+        (function () {
+            function disableBack() { window.history.forward() }
+            window.onload = disableBack();
+            window.onpageshow = function (evt) { if (evt.persisted) disableBack() }
+        })();
 
         return (
             <div className="wrapper">
@@ -53,22 +65,23 @@ class CreateCourseComp extends React.Component {
                                     <p>Dashboard</p>
                                 </Link>
                             </li>
-                            <li >
-                                <Link to={{ pathname: '/admin/createquiz' }}>
-                                    <i className="material-icons">person</i>
-                                    <p >Create Quiz</p>
+                            <li>
+                                <Link to={{ pathname: '/admin/createProgram' }}>
+                                    <i className="material-icons">location_on</i>
+                                    <p>Create Program</p>
+                                </Link>
+
+                            </li>
+                            <li>
+                                <Link to={{ pathname: '/admin/createcourse' }}>
+                                    <i className="material-icons">content_paste</i>
+                                    <p>Create Course</p>
                                 </Link>
                             </li>
                             <li className="active">
-                                <Link to={{ pathname: '/admin/createcourse' }}>
-                                    <i className="material-icons">content_paste</i>
-                                    <p className="colorrr">Create Course</p>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to={{ pathname: '#' }}>
-                                    <i className="material-icons">location_on</i>
-                                    <p>Maps</p>
+                                <Link to={{ pathname: '/admin/createquiz' }}>
+                                    <i className="material-icons">person</i>
+                                    <p className="colorrr">Create Quiz</p>
                                 </Link>
                             </li>
                             <li>
@@ -92,50 +105,74 @@ class CreateCourseComp extends React.Component {
                                     <span className="icon-bar"></span>
                                     <span className="icon-bar"></span>
                                 </button>
-                                <a className="navbar-brand" href="#">Create Course</a>
+                                <a className="navbar-brand" href="#">Create Quiz</a>
+
                             </div>
+
                             <div className="collapse navbar-collapse">
                                 <ul className="nav navbar-nav navbar-right">
                                     {/*button*/}
                                     <button onClick={this.logout.bind(this)} className="btn btn-primary btn-round">Logout</button>
                                 </ul>
-
                             </div>
+
 
                         </div>
                     </nav>
+
                     <div className="content">
+                        <button type="submit" className="pull-right btn btn-danger" >Finish</button>
                         <div className="container-fluid">
 
-                            <div className="container">
-                                <div className="row">
-                                    <div className="col-md-7">
-                                        <div className="card">
-                                            <ul className="nav nav-tabs" role="tablist">
-                                                <li role="presentation" ><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Course list</a></li>
-                                            </ul>
+                            <section>
 
-                                            <div className="tab-content">
-                                                <div role="tabpanel" className="tab-pane active" id="home">
-                                                    <div className="form-group  is-empty">
-                                                        <input type="text" className="form-control" placeholder="Course Name" />
-                                                        <a className="btn icon-btn btn-success" ><span className="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>Add Course</a>
+                                <div className="content-wrapper">
+
+                                    <div className="table-grid todo">
+                                        <div className="col col-lg">
+                                            <div className="pr-lg">
+                                                <form className="mb-xl">
+                                                    <div className="form-group" style={{ marginTop: '0px' }}>
+                                                        <input type="text" placeholder="Quiz Title" required="required" className="form-control" />
                                                     </div>
-
-                                                    <div className="panel panel-default widget">
-                                                        <div className="panel-body">
-                                                            <ul className="list-group" style={{ marginTop: '0px' }}>
-
-                                                            </ul>
-                                                        </div>
+                                                    <div className="form-group">
+                                                        <select className="form-control form-control-selectpicker">
+                                                            <option value="0">Select Course</option>
+                                                            <option value="Git">Git</option>
+                                                            <option value="JavaScript">JavaScript</option>
+                                                            <option value="Css">Css</option>
+                                                        </select>
                                                     </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div className="col todo-item-list">
 
+                                            <div className="btn btn-primary btn-block" style={{ cursor: 'text' }}>Create Question</div>
+                                            <div className="form-group">
+                                                <textarea placeholder="Type a Question" rows="8" className="form-control" value=''></textarea>
+                                            </div>
+
+                                            <div className="todo-item panel panel-default todo-complete" style={{ float: 'left', width: '50%' }}>
+                                                <div className="panel-heading">
+                                                    <h4 className="panel-title">
+                                                        <span role="button" data-toggle="collapse-disabled" data-parent="#accordion" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" className="clickable">
+                                                            <span className="todo-title">
+                                                                <input value='' style={{ width: '100%' }} id="todo-item-0" />
+                                                            </span>
+                                                        </span>
+                                                    </h4>
                                                 </div>
                                             </div>
+
+                                            <button type="submit" className="btn btn-primary">Add as Option</button>
+                                            <button className="btn btn-primary" style={{ float: 'right' }} >Next</button>
+                                            <div style={{ clear: 'both' }} ></div>
+
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </section>
 
                             {/*<div className="row">
                                 <div className="col-lg-3 col-md-6 col-sm-6">
@@ -587,4 +624,5 @@ class CreateCourseComp extends React.Component {
     }
 }
 
-export const CreateCourse = connect(mapStateToProps, mapDispatchToProps)(CreateCourseComp)
+
+export const CreateQuiz = connect(mapStateToProps, mapDispatchToProps)(CreateQuizComp);

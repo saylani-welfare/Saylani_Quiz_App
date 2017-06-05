@@ -4,8 +4,7 @@ const Schema = mongoose.Schema;
 const McqsSchema = new Schema({
 
     question: {
-        type: Array,
-        default: []
+        type: String
     },
     options: {
         type: Array,
@@ -35,12 +34,24 @@ module.exports = Quizes;
 
 
 // {
-//     _id: ObjectId("5933d0b496a3594ad5b92a11"),
-//     quiz: "quiz#12",
-// course_name: "DCCN"
-//     mcqs: [{
-//         question: ["what is JS?"], 
-//         options: ["Scriting lang", "Programming language", "hyperText language", "Styling"], 
-//         answers: ["Scripting lang", "Programming Language"]
-//         }]
+//      "quiz": "quiz#1",
+//      "course_name": "DCCN",
+//      "mcqs": [
+//      	{
+//          "question": "what is topology?", 
+//          "options": ["LAN", "the way in which constituent parts are interrelated or arranged", "the topology of a computer network", "WAN"], 
+//          "answers": ["the way in which constituent parts are interrelated or arranged", "the topology of a computer network"]
+//          },
+       
+//         {
+//          "question": "what is topology?", 
+//          "options": ["LAN", "the way in which constituent parts are interrelated or arranged", "the topology of a computer network", "WAN"], 
+//          "answers": ["the way in which constituent parts are interrelated or arranged", "the topology of a computer network"]	
+//         },
+//          {
+//          "question": "what is topology?", 
+//          "options": ["LAN", "the way in which constituent parts are interrelated or arranged", "the topology of a computer network", "WAN"], 
+//          "answers": ["the way in which constituent parts are interrelated or arranged", "the topology of a computer network"]	
+//         }
+//          ]
 // }

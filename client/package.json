@@ -5,7 +5,8 @@
   "dependencies": {
     "firebase": "^3.7.4",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "redux-persist": "^4.8.0"
   },
   "devDependencies": {
     "react-redux": "^5.0.4",
