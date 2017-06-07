@@ -8,30 +8,47 @@ export default class AllPrograms extends React.Component {
         super(props)
 
         this.state = {
-            availablePrograms: []
+            availablePrograms: [],
+            success: 'none'
         }
+        this.flag = true
+    }
+
+    componentWillUnmount() {
+        this.flag = false
     }
 
     componentDidMount() {
         var allPrograms = [];
         axios.get('http://localhost:3050/api/getAllPrograms')
             .then(function (response) {
-                // allPrograms.push(response.data)
-                // console.log(response)
-                response.data.map((name) => {
-                    return allPrograms.push(name)
-                })
+                allPrograms = response.data
             })
             .then(() => {
-                this.setState({
-                    availablePrograms: allPrograms
-                })
-                // console.log(this.availablePrograms);
+                if (this.flag === true) {
+                    this.setState({
+                        availablePrograms: allPrograms
+                    })
+                }
             })
     }
 
-    del() {
-        console.log('delete');
+    del(Pid) {
+        // console.log(Pid)
+        axios.delete('http://localhost:3050/api/deleteProgram/' + Pid)
+            .then(function (response) {
+                console.log('deleted')
+            })
+            .then(() => {
+                this.setState({
+                    success: 'block'
+                })
+                window.location.assign('/admin/createProgram');
+
+            })
+            .catch(() => {
+                alert('Failed To Delete');
+            })
     }
 
     render() {
@@ -45,15 +62,16 @@ export default class AllPrograms extends React.Component {
                                 <li role="presentation" ><a href="#home" aria-controls="home" role="tab" data-toggle="tab">All Programs</a></li>
                             </ul>
                             <br />
-                            {this.state.availablePrograms.map((obj, index) => {
-
+                            {this.state.availablePrograms.map((Proname) => {
                                 return (
-                                    <div key={index}>
-                                        <a href="#" className="list-group-item">{obj.program}<span style={{ float: 'right' }}><i onClick={this.del.bind(this)} className="fa fa-trash-o" aria-hidden="true"></i></span></a>
+                                    <div key={Proname._id}>
+                                        <a href="#" className="list-group-item">{Proname.program}<span style={{ float: 'right' }}><i onClick={this.del.bind(this, Proname._id)} className="fa fa-trash-o" aria-hidden="true"></i></span></a>
                                     </div>
                                 )
                             })}
-
+                        </div>
+                        <div className="alert alert-success" style={{ display: this.state.success }}>
+                            <b>Successfully Deleted !!</b>
                         </div>
                     </div>
                 </div>

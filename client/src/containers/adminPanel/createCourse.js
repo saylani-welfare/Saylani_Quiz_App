@@ -7,35 +7,10 @@ import { Store } from '../../store/store.js';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import TokenMiddlware from '../../middlewares/adminMiddlewares/tokenMiddleware';
+import Logout from '../../components/adminPanel/logout.js';
 
 
-function mapStateToProps(state) {
-    return {
-        AUTH_TOKEN: state.TokenReducer.auth_token
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        rmTOKEN: () => { Store.dispatch(TokenMiddlware.RemoveToken()) }
-    }
-}
-
-class CreateCourseComp extends React.Component {
-
-    componentWillMount() {
-        persistStore(Store, {}, () => {
-            if (this.props.AUTH_TOKEN === '') {
-                browserHistory.push('/admin');
-                // console.log(this.props.AUTH_TOKEN );
-            }
-        });
-    }
-
-    logout() {
-        this.props.rmTOKEN();
-        browserHistory.push('/admin');
-    }
+export class CreateCourse extends React.Component {
 
     render() {
 
@@ -72,8 +47,14 @@ class CreateCourseComp extends React.Component {
                                 </Link>
 
                             </li>
+                            <li>
+                                <Link to={{ pathname: '/admin/createBatch' }}>
+                                    <i className="material-icons">content_paste</i>
+                                    <p>Create Batch</p>
+                                </Link>
+                            </li>
                             <li className="active">
-                                <Link to={{ pathname: '/admin/createcourse' }}>
+                                <Link to={{ pathname: '/admin/createCourse' }}>
                                     <i className="material-icons">content_paste</i>
                                     <p className="colorrr">Create Course</p>
                                 </Link>
@@ -107,13 +88,8 @@ class CreateCourseComp extends React.Component {
                                 </button>
                                 <a className="navbar-brand" href="#">Create Course</a>
                             </div>
-                            <div className="collapse navbar-collapse">
-                                <ul className="nav navbar-nav navbar-right">
-                                    {/*button*/}
-                                    <button onClick={this.logout.bind(this)} className="btn btn-primary btn-round">Logout</button>
-                                </ul>
 
-                            </div>
+                            <Logout />
 
                         </div>
                     </nav>
@@ -599,5 +575,3 @@ class CreateCourseComp extends React.Component {
         );
     }
 }
-
-export const CreateCourse = connect(mapStateToProps, mapDispatchToProps)(CreateCourseComp)

@@ -72,7 +72,12 @@ class DashboardComp extends React.Component {
                                     <i className="material-icons">location_on</i>
                                     <p>Create Program</p>
                                 </Link>
-
+                            </li>
+                            <li>
+                                <Link to={{ pathname: '/admin/createBatch' }}>
+                                    <i className="material-icons">content_paste</i>
+                                    <p>Create Batch</p>
+                                </Link>
                             </li>
                             <li>
                                 <Link to={{ pathname: '/admin/createcourse' }}>

@@ -2,11 +2,9 @@
 import React from 'react';
 import '../../../public/assets/css/material-dashboard.css';
 import { Link } from 'react-router';
-import AddProgram from '../../components/adminPanel/addProgram.js';
-import AllPrograms from '../../components/adminPanel/allPrograms.js';
 import Logout from '../../components/adminPanel/logout.js';
 
-export class CreateProgram extends React.Component {
+export class CreateBatch extends React.Component {
 
     render() {
 
@@ -35,16 +33,16 @@ export class CreateProgram extends React.Component {
                                     <p>Dashboard</p>
                                 </Link>
                             </li>
-                            <li className="active">
+                            <li>
                                 <Link to={{ pathname: '/admin/createProgram' }}>
                                     <i className="material-icons">location_on</i>
-                                    <p className="colorrr">Create Program</p>
+                                    <p>Create Program</p>
                                 </Link>
                             </li>
-                            <li>
+                            <li className="active">
                                 <Link to={{ pathname: '/admin/createBatch' }}>
-                                    <i className="material-icons">content_paste</i>
-                                    <p>Create Batch</p>
+                                    <i className="material-icons">location_on</i>
+                                    <p className="colorrr">Create Batch</p>
                                 </Link>
                             </li>
                             <li>
@@ -80,7 +78,7 @@ export class CreateProgram extends React.Component {
                                     <span className="icon-bar"></span>
                                     <span className="icon-bar"></span>
                                 </button>
-                                <a className="navbar-brand" href="#">Create Program</a>
+                                <a className="navbar-brand" href="#">Create Batch</a>
                             </div>
 
                             <Logout />
@@ -90,9 +88,8 @@ export class CreateProgram extends React.Component {
                     <div className="content">
                         <div className="container-fluid">
 
-                            <AddProgram />
+                            {/*Enter Components Here .....! */}
 
-                            <AllPrograms />
 
                             {/*<div className="row">
                                 <div className="col-lg-3 col-md-6 col-sm-6">

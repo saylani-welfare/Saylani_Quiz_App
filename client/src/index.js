@@ -17,6 +17,8 @@ import { Dashboard } from '../src/containers/adminPanel/dashboard.js'
 import { CreateQuiz } from '../src/containers/adminPanel/createQuiz.js'
 import { CreateCourse } from '../src/containers/adminPanel/createCourse.js'
 import { CreateProgram } from '../src/containers/adminPanel/createProgram.js'
+import { CreateBatch } from '../src/containers/adminPanel/createBatch.js'
+
 
 
 ReactDOM.render(
@@ -32,6 +34,7 @@ ReactDOM.render(
         <Route path='/admin/dashboard' component={Dashboard} />
         <Route path='/admin/createProgram' component={CreateProgram} />
         <Route path='/admin/createCourse' component={CreateCourse} />
+        <Route path='/admin/createBatch' component={CreateBatch} />
         <Route path='/admin/createquiz' component={CreateQuiz} />
 
 
