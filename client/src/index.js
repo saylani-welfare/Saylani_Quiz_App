@@ -4,7 +4,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
-import { Store } from './store/store.js'
+import { Store } from './store/store.js';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 
 //** Student Component **// 
 import { App } from './containers/app.js';
@@ -20,28 +23,29 @@ import { CreateProgram } from '../src/containers/adminPanel/createProgram.js'
 import { CreateBatch } from '../src/containers/adminPanel/createBatch.js'
 
 
-
 ReactDOM.render(
-  <Provider store={Store}>
-    <Router history={browserHistory}>
+  <MuiThemeProvider>
+    <Provider store={Store}>
+      <Router history={browserHistory}>
 
-      <Route path='/' component={App}>
-        <IndexRoute component={MainPage} />
-      </Route>
+        <Route path='/' component={App}>
+          <IndexRoute component={MainPage} />
+        </Route>
 
-      <Route path='/admin' component={Admin}>
-        <IndexRoute component={AdminLogin} />
-        <Route path='/admin/dashboard' component={Dashboard} />
-        <Route path='/admin/createProgram' component={CreateProgram} />
-        <Route path='/admin/createCourse' component={CreateCourse} />
-        <Route path='/admin/createBatch' component={CreateBatch} />
-        <Route path='/admin/createquiz' component={CreateQuiz} />
+        <Route path='/admin' component={Admin}>
+          <IndexRoute component={AdminLogin} />
+          <Route path='/admin/dashboard' component={Dashboard} />
+          <Route path='/admin/createProgram' component={CreateProgram} />
+          <Route path='/admin/createCourse' component={CreateCourse} />
+          <Route path='/admin/createBatch' component={CreateBatch} />
+          <Route path='/admin/createquiz' component={CreateQuiz} />
 
 
-      </Route>
+        </Route>
 
-    </Router>
-  </Provider>
+      </Router>
+    </Provider>
+  </MuiThemeProvider>
   ,
   document.getElementById("root")
 );

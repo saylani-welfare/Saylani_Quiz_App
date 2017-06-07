@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import TokenMiddlware from '../../middlewares/adminMiddlewares/tokenMiddleware';
 import Logout from '../../components/adminPanel/logout.js';
+import AddCourse from '../../components/adminPanel/addCourse.js';
 
 
 export class CreateCourse extends React.Component {
@@ -96,35 +97,7 @@ export class CreateCourse extends React.Component {
                     <div className="content">
                         <div className="container-fluid">
 
-                            <div className="container">
-                                <div className="row">
-                                    <div className="col-md-7">
-                                        <div className="card">
-                                            <ul className="nav nav-tabs" role="tablist">
-                                                <li role="presentation" ><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Course list</a></li>
-                                            </ul>
-
-                                            <div className="tab-content">
-                                                <div role="tabpanel" className="tab-pane active" id="home">
-                                                    <div className="form-group  is-empty">
-                                                        <input type="text" className="form-control" placeholder="Course Name" />
-                                                        <a className="btn icon-btn btn-success" ><span className="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>Add Course</a>
-                                                    </div>
-
-                                                    <div className="panel panel-default widget">
-                                                        <div className="panel-body">
-                                                            <ul className="list-group" style={{ marginTop: '0px' }}>
-
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <AddCourse />
 
                             {/*<div className="row">
                                 <div className="col-lg-3 col-md-6 col-sm-6">
