@@ -31,11 +31,19 @@ module.exports = {
                         })
                             .then(() => { res.send({ success: true }) })
                             .catch(next)
-                    }                    
+                    }
                 })
                     .catch(next)
             })
         })
+            .catch(next)
+    },
+
+    deleteCourse(req, res, next) {
+        Courses.remove({ _id: req.params.id })
+            .then((delCor) => {
+                res.send({ success: true })
+            })
             .catch(next)
     }
 }

@@ -41,6 +41,8 @@ function routes(app) {
     app.use(ErrMiddleware);
     app.post('/api/addCourse', CourseControllers.addCourse);
     app.use(ErrMiddleware);
+    app.delete('/api/deleteCourse/:id', CourseControllers.deleteCourse);
+    app.use(ErrMiddleware);
 
     //API's for Quizes
     app.get("/api/getAllCourses", QuizControllers.getAllCourses);

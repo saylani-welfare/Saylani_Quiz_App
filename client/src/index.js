@@ -32,15 +32,14 @@ ReactDOM.render(
           <IndexRoute component={MainPage} />
         </Route>
 
-        <Route path='/admin' component={Admin}>
-          <IndexRoute component={AdminLogin} />
-          <Route path='/admin/dashboard' component={Dashboard} />
+        <Route path='/admin' component={AdminLogin} />
+
+        <Route path='/admin/dashboard' component={Admin}>
+          <IndexRoute component={Dashboard} />
           <Route path='/admin/createProgram' component={CreateProgram} />
           <Route path='/admin/createCourse' component={CreateCourse} />
           <Route path='/admin/createBatch' component={CreateBatch} />
           <Route path='/admin/createquiz' component={CreateQuiz} />
-
-
         </Route>
 
       </Router>

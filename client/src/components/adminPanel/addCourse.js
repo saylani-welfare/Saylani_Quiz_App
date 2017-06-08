@@ -70,6 +70,7 @@ export default class AddCourse extends React.Component {
                     value1: '',
                     value2: ''
                 })
+                window.location.assign('/admin/createCourse');
             })
     }
 
