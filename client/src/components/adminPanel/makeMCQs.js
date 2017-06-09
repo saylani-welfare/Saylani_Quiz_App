@@ -1,24 +1,90 @@
+
 import React from 'react';
 import '../../../public/assets/css/material-dashboard.css';
 import axios from 'axios';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
+import { Store } from '../../store/store.js';
+import { connect } from 'react-redux';
+import MakeMCQsMiddlware from '../../middlewares/adminMiddlewares/makeMCQsMiddleware'
 
+function mapStateToProps(state) {
+    return {
+        QUIZ: state.MakeMCQsReducer
+    }
+}
 
-export default class MakeMCQS extends React.Component {
+function mapDispatchToProps(dispatch) {
+    return {
+        saveThisQuestion: (quesOBJ) => { Store.dispatch(MakeMCQsMiddlware.saveMCQ(quesOBJ)) }
+    }
+}
+
+class MakeMCQS extends React.Component {
 
     constructor(props) {
         super(props)
 
+        this.checked = false
+
         this.state = {
+            questionBoxValue: '',
             Optvalue: '',
-            OptsArray: []
+            OptsArray: [],
+            AnsArray: []
         }
     }
+
+    inputBoxValue(eve) {
+        var val = eve.target.value;
+        this.setState({
+            quizVal: val
+        })
+    }
+
+    componentWillMount() {
+        var allCourses = [];
+        axios.get('http://localhost:3050/api/getAllCourses')
+            .then(function (response) {
+                allCourses = response.data
+            })
+            .then(() => {
+                this.setState({
+                    availableCourses: allCourses
+                })
+            })
+    }
+
+    handleChange1 = (event, index, value1) => this.setState({ value1 });
 
     handleChange(eve) {
         var val = eve.target.value
         this.setState({
             Optvalue: val
         })
+    }
+
+    handleQuestionChange(eve) {
+        var val = eve.target.value;
+        this.setState({
+            questionBoxValue: val
+        })
+    }
+
+    handleCheckboxChange(eve) {
+
+        console.log(eve.target.checked);
+
+        if (eve.target.checked === true) {
+            this.state.AnsArray.push(eve.target.value)
+            console.log(this.state.AnsArray);
+        }
+
+        if (eve.target.checked === false) {
+            var pos = this.state.AnsArray.indexOf(eve.target.value);
+            this.state.AnsArray.splice(pos, 1)
+            console.log(this.state.AnsArray);
+        }
     }
 
     addOpt() {
@@ -30,24 +96,28 @@ export default class MakeMCQS extends React.Component {
 
     removeOpt(index) {
 
-        this.state.OptsArray.pop(index)
+        this.state.OptsArray.splice(index, 1);
         this.forceUpdate();
     }
 
     Next() {
-        console.log("Save To Store")
+        // console.log("Save To Store")
+        this.props.saveThisQuestion({ question: this.state.questionBoxValue, options: this.state.OptsArray, answers: this.state.AnsArray });
+
+        console.log(this.props.QUIZ);
     }
 
     render() {
+
         return (
             <div className="container">
                 <div className="row">
                     <div className="col-md-7">
+
                         <div className="card">
                             <ul className="nav nav-tabs" role="tablist">
-                                <li role="presentation" ><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Make MCQ's</a></li>
+                                <li role="presentation" ><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Make MCQ'S</a></li>
                             </ul>
-
                             <div className="tab-content">
                                 <div role="tabpanel" className="tab-pane active" id="home">
                                     <div className="form-group  is-empty">
@@ -56,7 +126,7 @@ export default class MakeMCQS extends React.Component {
                                             <div className="row">
                                                 <div className="col-md-6">
                                                     <div className="widget-five mb30">
-                                                        <textarea rows="5" className="form-control resize-v post-area" placeholder="Enter a Question here...."></textarea>
+                                                        <textarea rows="5" onChange={this.handleQuestionChange.bind(this)} value={this.state.questionBoxValue} className="form-control resize-v post-area" placeholder="Enter a Question here...."></textarea>
                                                         <br />
                                                         <div className="todo-item panel panel-default todo-complete">
                                                             <div className="panel-heading">
@@ -82,7 +152,7 @@ export default class MakeMCQS extends React.Component {
                                                                     return (
                                                                         <tr key={index}>
                                                                             <td>
-                                                                                <input type="checkbox" name="optionsCheckboxes" />
+                                                                                <input value={OptText} onClick={this.handleCheckboxChange.bind(this)} type="checkbox" name="optionsCheckboxes" />
                                                                             </td>
                                                                             <td style={{ width: '100%' }} >{OptText}</td>
                                                                             <td className="td-actions text-right">
@@ -113,3 +183,5 @@ export default class MakeMCQS extends React.Component {
         )
     }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(MakeMCQS);

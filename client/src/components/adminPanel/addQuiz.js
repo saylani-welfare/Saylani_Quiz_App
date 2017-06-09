@@ -3,9 +3,24 @@ import '../../../public/assets/css/material-dashboard.css';
 import axios from 'axios';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
-// import { browserHistory } from 'react-router';
+import { Store } from '../../store/store.js';
+import { connect } from 'react-redux';
+import MakeMCQsMiddlware from '../../middlewares/adminMiddlewares/makeMCQsMiddleware'
 
-export default class AddQuiz extends React.Component {
+
+function mapStateToProps(state) {
+    return {
+        QUIZ: state.MakeMCQsReducer
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        saveQuizTitle: (quizTitle, selectedCourse) => { Store.dispatch(MakeMCQsMiddlware.saveQuizName(quizTitle, selectedCourse)) }
+    }
+}
+
+class AddQuiz extends React.Component {
 
     constructor(props) {
         super(props)
@@ -35,6 +50,12 @@ export default class AddQuiz extends React.Component {
                     availableCourses: allCourses
                 })
             })
+    }
+
+    makeQuizTitle() {
+
+        this.props.saveQuizTitle(this.state.quizVal, this.state.value1)
+        console.log(this.props.QUIZ);
     }
 
     handleChange1 = (event, index, value1) => this.setState({ value1 });
@@ -68,6 +89,9 @@ export default class AddQuiz extends React.Component {
                                     })
                                 }
                             </DropDownMenu>
+
+                            <button style={{ backgroundColor: "Green" }} onClick={this.makeQuizTitle.bind(this)} className="btn btn-primary">Make Title</button>
+
                         </div>
                     </div>
                 </div>
@@ -75,5 +99,4 @@ export default class AddQuiz extends React.Component {
         )
     }
 }
-
-
+export default connect(mapStateToProps, mapDispatchToProps)(AddQuiz);

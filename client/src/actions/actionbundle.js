@@ -15,4 +15,19 @@ export default class ActionBundle {
             delTOKEN: ''
         }
     }
+
+    static question(questOBJ) {
+        return {
+            type: 'QUESTION',
+            Question: questOBJ
+        }
+    }
+
+    static svQuizName(quizTitle, selectedCourse) {
+        return {
+            type: 'SVQUIZNAME',
+            title: quizTitle,
+            course: selectedCourse
+        }
+    }
 }
