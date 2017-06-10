@@ -16,7 +16,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        saveThisQuestion: (quesOBJ) => { Store.dispatch(MakeMCQsMiddlware.saveMCQ(quesOBJ)) }
+        saveThisQuestion: (quesOBJ) => { Store.dispatch(MakeMCQsMiddlware.saveMCQ(quesOBJ)) },
+        clear: () => { Store.dispatch({ type: 'CLEARMCQS' }) }
     }
 }
 
@@ -73,17 +74,17 @@ class MakeMCQS extends React.Component {
 
     handleCheckboxChange(eve) {
 
-        console.log(eve.target.checked);
+        // console.log(eve.target.checked);
 
         if (eve.target.checked === true) {
             this.state.AnsArray.push(eve.target.value)
-            console.log(this.state.AnsArray);
+            // console.log(this.state.AnsArray);
         }
 
         if (eve.target.checked === false) {
             var pos = this.state.AnsArray.indexOf(eve.target.value);
             this.state.AnsArray.splice(pos, 1)
-            console.log(this.state.AnsArray);
+            // console.log(this.state.AnsArray);
         }
     }
 
@@ -101,10 +102,30 @@ class MakeMCQS extends React.Component {
     }
 
     Next() {
-        // console.log("Save To Store")
-        this.props.saveThisQuestion({ question: this.state.questionBoxValue, options: this.state.OptsArray, answers: this.state.AnsArray });
+
+        if (this.props.QUIZ.quiz === '' || this.props.QUIZ.course_name === '') {
+            alert("Add quiz first")
+        }
+        else {
+            this.props.saveThisQuestion({ question: this.state.questionBoxValue, options: this.state.OptsArray, answers: this.state.AnsArray });
+            this.setState({
+                questionBoxValue: '',
+                OptsArray: [],
+                AnsArray: []
+            })
+        }
 
         console.log(this.props.QUIZ);
+    }
+
+    Finish() {
+        axios.post('http://localhost:3050/api/makeQuiz', this.props.QUIZ)
+            .then(function (response) {
+                console.log(response.data)
+            })
+            .then(() => {
+                this.props.clear();
+            })
     }
 
     render() {
@@ -142,7 +163,7 @@ class MakeMCQS extends React.Component {
                                                         <ul className="post-tools list-unstyled clearfix">
 
                                                             <li className="pull-right">
-                                                                <button onClick={this.addOpt.bind(this)} className="btn btn-primary">Add Option</button>
+                                                                <button onClick={this.addOpt.bind(this)} style={{ backgroundColor: "grey" }} className="btn btn-primary btn-round">Add Option</button>
                                                             </li>
                                                         </ul>
                                                         <table className="table">
@@ -168,6 +189,7 @@ class MakeMCQS extends React.Component {
                                                         </table>
 
                                                         <button style={{ backgroundColor: "Green" }} onClick={this.Next.bind(this)} className="btn btn-primary">Next</button>
+                                                        <button onClick={this.Finish.bind(this)} style={{ float: 'right', marginRight: '8px' }} className="btn btn-primary">Finish</button>
 
                                                     </div>
                                                 </div>

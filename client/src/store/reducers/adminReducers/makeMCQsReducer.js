@@ -16,6 +16,9 @@ export default function MakeMCQsReducer(state = INITIAL_STATE, action) {
         case 'SVQUIZNAME':
             return Object.assign({}, state, { quiz: action.title, course_name: action.course })
 
+        case 'CLEARMCQS':
+            return Object.assign({}, state, { quiz: '', course_name: '', mcqs: [] })
+
         default: return state
     }
 }

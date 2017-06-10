@@ -30,41 +30,45 @@ export class Admin extends React.Component {
                         <ul className="nav">
                             <li>
                                 <Link to={{ pathname: '/admin/dashboard' }}>
-                                    <i className="material-icons">dashboard</i>
+                                    <i className="fa fa-circle"></i>
                                     <p>Dashboard</p>
                                 </Link>
                             </li>
                             <li>
                                 <Link to={{ pathname: '/admin/createProgram' }}>
-                                    <i className="material-icons">location_on</i>
+                                    {/*<i className="fa fa-circle"></i>*/}
+                                    <i className="material-icons">content_paste</i>
                                     <p>Create Program</p>
                                 </Link>
 
                             </li>
                             <li>
                                 <Link to={{ pathname: '/admin/createBatch' }}>
+                                    {/*<i className="fa fa-circle"></i>*/}
                                     <i className="material-icons">content_paste</i>
                                     <p>Create Batch</p>
                                 </Link>
                             </li>
                             <li >
                                 <Link to={{ pathname: '/admin/createCourse' }}>
+                                    {/*<i className="fa fa-circle"></i>*/}
                                     <i className="material-icons">content_paste</i>
                                     <p>Create Course</p>
                                 </Link>
                             </li>
                             <li>
                                 <Link to={{ pathname: '/admin/createquiz' }}>
-                                    <i className="material-icons">person</i>
+                                    {/*<i className="fa fa-circle"></i>*/}
+                                    <i className="material-icons">content_paste</i>
                                     <p>Create Quiz</p>
                                 </Link>
                             </li>
-                            <li>
+                            {/*<li>
                                 <Link to={{ pathname: '#' }}>
                                     <i className="material-icons text-gray">notifications</i>
                                     <p>Notifications</p>
                                 </Link>
-                            </li>
+                            </li>*/}
                         </ul>
                     </div>
                 </div>
