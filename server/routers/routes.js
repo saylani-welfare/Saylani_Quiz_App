@@ -35,6 +35,8 @@ function routes(app) {
     app.use(ErrMiddleware);
     app.post('/api/addBatch', batchControllers.addBatch);
     app.use(ErrMiddleware);
+    app.get('/api/getSpecificBatches', batchControllers.specificBatches);
+    app.use(ErrMiddleware);
 
     //API's for courses
     app.get('/api/getAllBatches', CourseControllers.getAllBatches);

@@ -27,19 +27,7 @@ export default class AddCourse extends React.Component {
     }
 
     componentWillMount() {
-        var Batches = [];
         var Programs = [];
-        axios.get('http://localhost:3050/api/getAllBatches')
-            .then(function (response) {
-                response.data.map((Obj) => {
-                    Batches.push(Obj.batch)
-                })
-            })
-            .then(() => {
-                this.setState({
-                    allBatches: Batches
-                })
-            })
 
         axios.get('http://localhost:3050/api/getAllPrograms')
             .then(function (response) {
@@ -50,6 +38,25 @@ export default class AddCourse extends React.Component {
             .then(() => {
                 this.setState({
                     allPrograms: Programs
+                })
+            })
+    }
+
+    fetchBatches(Pname) {
+        var Batches = [];
+        var config = {
+            headers: { program_name: Pname }
+        }
+
+        axios.get('http://localhost:3050/api/getSpecificBatches', config)
+            .then(function (response) {
+                response.data.map((Obj) => {
+                    Batches.push(Obj.batch)
+                })
+            })
+            .then(() => {
+                this.setState({
+                    allBatches: Batches
                 })
             })
     }
@@ -93,7 +100,18 @@ export default class AddCourse extends React.Component {
                                 </div>
                             </div>
 
-                            <label style={{ position: 'relative', bottom: '25px', paddingLeft: '25px' }}>Batches</label>
+                            <label style={{ position: 'relative', bottom: '25px', paddingLeft: '25px' }}>Programs</label>
+                            <DropDownMenu value={this.state.value2} onChange={this.handleChange2} style={{ width: '150px' }}>
+                                {
+                                    this.state.allPrograms.map((Pname, index) => {
+                                        return (
+                                            <MenuItem onClick={this.fetchBatches.bind(this, Pname)} key={index} value={Pname} primaryText={Pname} />
+                                        )
+                                    })
+                                }
+                            </DropDownMenu>
+
+                            <label style={{ position: 'relative', bottom: '25px' }}>Batches</label>
                             <DropDownMenu value={this.state.value1} onChange={this.handleChange1} style={{ width: '150px' }}>
                                 {
                                     this.state.allBatches.map((Bname, index) => {
@@ -103,18 +121,6 @@ export default class AddCourse extends React.Component {
                                     })
                                 }
                             </DropDownMenu>
-
-                            <label style={{ position: 'relative', bottom: '25px' }}>Programs</label>
-                            <DropDownMenu value={this.state.value2} onChange={this.handleChange2} style={{ width: '150px' }}>
-                                {
-                                    this.state.allPrograms.map((Pname, index) => {
-                                        return (
-                                            <MenuItem key={index} value={Pname} primaryText={Pname} />
-                                        )
-                                    })
-                                }
-                            </DropDownMenu>
-
 
                             <div className="tab-content">
                                 <a className="btn icon-btn btn-success" onClick={this.addACourse.bind(this)}><span className="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>Add Course</a>

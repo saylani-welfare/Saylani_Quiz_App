@@ -30,6 +30,20 @@ module.exports = {
             }
         })
             .catch(next)
+    },
+
+    specificBatches(req, res, next) {
+        var programName = req.headers.program_name;
+
+        Programs.findOne({ program: programName }, function (err, founded) {
+            if (founded) {
+                Batches.find({ program_id: founded._id }, function (err, founded) {
+                    res.send(founded)
+                })
+                    .catch(next)
+            }
+        })
+            .catch(next)
     }
 }
 
