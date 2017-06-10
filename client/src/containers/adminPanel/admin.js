@@ -63,12 +63,7 @@ export class Admin extends React.Component {
                                     <p>Create Quiz</p>
                                 </Link>
                             </li>
-                            {/*<li>
-                                <Link to={{ pathname: '#' }}>
-                                    <i className="material-icons text-gray">notifications</i>
-                                    <p>Notifications</p>
-                                </Link>
-                            </li>*/}
+
                         </ul>
                     </div>
                 </div>
