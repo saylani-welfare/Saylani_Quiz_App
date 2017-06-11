@@ -39,7 +39,7 @@ export class CreateCourse extends React.Component {
                             <a className="navbar-brand" href="#">Create Course</a>
                         </div>
 
-                        <Logout />
+                        {/*<Logout />*/}
 
                     </div>
                 </nav>

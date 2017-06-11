@@ -21,10 +21,10 @@ import { CreateQuiz } from '../src/containers/adminPanel/createQuiz.js'
 import { CreateCourse } from '../src/containers/adminPanel/createCourse.js'
 import { CreateProgram } from '../src/containers/adminPanel/createProgram.js'
 import { CreateBatch } from '../src/containers/adminPanel/createBatch.js'
-
+import muiTheme from './them-default.js'
 
 ReactDOM.render(
-  <MuiThemeProvider>
+  <MuiThemeProvider muiTheme={muiTheme} >
     <Provider store={Store}>
       <Router history={browserHistory}>
 

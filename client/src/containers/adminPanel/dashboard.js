@@ -39,7 +39,7 @@ export class Dashboard extends React.Component {
                         <div className="collapse navbar-collapse">
                             <ul className="nav navbar-nav navbar-right">
 
-                                <Logout />
+                                {/*<Logout />*/}
 
                             </ul>
 

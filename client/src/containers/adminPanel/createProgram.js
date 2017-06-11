@@ -33,7 +33,7 @@ export class CreateProgram extends React.Component {
                             <a className="navbar-brand" href="#">Create Program</a>
                         </div>
 
-                        <Logout />
+                        {/*<Logout />*/}
 
                     </div>
                 </nav>

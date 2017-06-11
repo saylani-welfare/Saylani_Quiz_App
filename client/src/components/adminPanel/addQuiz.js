@@ -55,7 +55,10 @@ class AddQuiz extends React.Component {
     makeQuizTitle() {
 
         this.props.saveQuizTitle(this.state.quizVal, this.state.value1)
-        console.log(this.props.QUIZ);
+        this.setState({
+            quizVal: '',
+            value1: ''
+        })
     }
 
     handleChange1 = (event, index, value1) => this.setState({ value1 });
@@ -68,7 +71,7 @@ class AddQuiz extends React.Component {
                     <div className="col-md-7">
                         <div className="card">
                             <ul className="nav nav-tabs" role="tablist">
-                                <li role="presentation" ><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Quiz Title</a></li>
+                                <li role="presentation" ><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Add Quiz</a></li>
                             </ul>
 
                             <div className="tab-content">
@@ -90,7 +93,7 @@ class AddQuiz extends React.Component {
                                 }
                             </DropDownMenu>
 
-                            <button style={{ backgroundColor: "Green" }} onClick={this.makeQuizTitle.bind(this)} className="btn btn-primary">Make Title</button>
+                            <button style={{ backgroundColor: "grey", float: 'right', marginRight:'50px' }} onClick={this.makeQuizTitle.bind(this)} className="btn btn-primary btn-round">Add Quiz</button>
 
                         </div>
                     </div>

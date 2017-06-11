@@ -38,7 +38,7 @@ export class CreateQuiz extends React.Component {
                             <a className="navbar-brand" href="#">Create Quiz</a>
                         </div>
 
-                        <Logout />
+                        {/*<Logout />*/}
 
                     </div>
                 </nav>
