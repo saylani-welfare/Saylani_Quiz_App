@@ -1,21 +1,20 @@
 
 import React from 'react';
 import '../../../public/assets/css/material-dashboard.css';
-import { persistStore } from 'redux-persist';
 import { Link } from 'react-router';
-import { Store } from '../../store/store.js';
-import { connect } from 'react-redux';
 import '../../../public/assets/css/style.css';
-import { browserHistory } from 'react-router';
+import Store from '../../store/store.js';
+import { connect } from 'react-redux';
+import { persistStore } from 'redux-persist';
+import Logout from './logout';
 import TokenMiddlware from '../../middlewares/adminMiddlewares/tokenMiddleware';
-import Logout from '../../components/adminPanel/logout.js';
+import { browserHistory } from 'react-router';
 
 
 export class Dashboard extends React.Component {
 
     render() {
 
-        //cannot come on this page using browser back button
         (function () {
             function disableBack() { window.history.forward() }
             window.onload = disableBack();

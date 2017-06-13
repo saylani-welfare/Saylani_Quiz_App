@@ -2,7 +2,8 @@
 import React from 'react';
 import '../../../public/assets/css/material-dashboard.css';
 import { Link } from 'react-router';
-import Logout from '../../components/adminPanel/logout.js';
+import Logout from './logout';
+
 
 export class CreateBatch extends React.Component {
 

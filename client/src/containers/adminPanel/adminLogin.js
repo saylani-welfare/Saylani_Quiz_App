@@ -1,20 +1,17 @@
 
 import React from 'react';
 import '../../../public/assets/css/style.css';
-import { Store } from '../../store/store.js'
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
+import Store from '../../store/store.js';
 import TokenMiddlware from '../../middlewares/adminMiddlewares/tokenMiddleware';
 import adminDefaultPic from '../../../public/assets/images/round.png';
-import axios from 'axios';
 
 
 function mapDispatchToProps(dispatch) {
     return {
-        TOKEN: (tok) => { Store.dispatch(TokenMiddlware.saveHisToken(tok)) }
+        isUserAuthentic: (userCredentail) => { Store.dispatch(TokenMiddlware.isUserAuthentic(userCredentail)) }
     }
 }
-
 
 class AdminLoginComp extends React.Component {
 
@@ -43,29 +40,11 @@ class AdminLoginComp extends React.Component {
     }
 
     Signin() {
-        var resOfsuccess;
-        var resOfToken;
-
-        axios.post('http://localhost:3050/api/adminLogin', this.state)
-            .then((response) => {
-                resOfsuccess = response.data.success;
-                resOfToken = JSON.parse(response.request.response).token
-            })
-            .then(() => {
-                if (resOfsuccess === false) {
-                    alert("You are Unauthorize");
-                }
-                else {
-                    var token = resOfToken;
-                    this.props.TOKEN(token);
-                    browserHistory.push('/admin/dashboard');
-
-                }
-            })
+        this.props.isUserAuthentic(this.state)
     }
 
     render() {
-        
+
         return (
             <div className="container" style={{ marginTop: '60px' }}>
                 <div className="row">

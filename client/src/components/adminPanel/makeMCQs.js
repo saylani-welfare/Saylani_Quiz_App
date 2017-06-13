@@ -1,132 +1,107 @@
 
 import React from 'react';
 import '../../../public/assets/css/material-dashboard.css';
-import axios from 'axios';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
-import { Store } from '../../store/store.js';
+import Store from '../../store/store.js';
 import { connect } from 'react-redux';
 import MakeMCQsMiddlware from '../../middlewares/adminMiddlewares/makeMCQsMiddleware'
 
-function mapStateToProps(state) {
-    return {
-        QUIZ: state.MakeMCQsReducer
-    }
-}
 
-function mapDispatchToProps(dispatch) {
-    return {
-        saveThisQuestion: (quesOBJ) => { Store.dispatch(MakeMCQsMiddlware.saveMCQ(quesOBJ)) },
-        clear: () => { Store.dispatch({ type: 'CLEARMCQS' }) }
-    }
-}
+export default class MakeMCQS extends React.Component {
 
-class MakeMCQS extends React.Component {
 
-    constructor(props) {
-        super(props)
+    // inputBoxValue(eve) {
+    //     var val = eve.target.value;
+    //     this.setState({
+    //         quizVal: val
+    //     })
+    // }
 
-        this.checked = false
+    // componentWillMount() {
+    //     var allCourses = [];
+    //     axios.get('http://localhost:3050/api/getAllCourses')
+    //         .then(function (response) {
+    //             allCourses = response.data
+    //         })
+    //         .then(() => {
+    //             this.setState({
+    //                 availableCourses: allCourses
+    //             })
+    //         })
+    // }
 
-        this.state = {
-            questionBoxValue: '',
-            Optvalue: '',
-            OptsArray: [],
-            AnsArray: []
-        }
-    }
+    // handleChange1 = (event, index, value1) => this.setState({ value1 });
 
-    inputBoxValue(eve) {
-        var val = eve.target.value;
-        this.setState({
-            quizVal: val
-        })
-    }
+    // handleChange(eve) {
+    //     var val = eve.target.value
+    //     this.setState({
+    //         Optvalue: val
+    //     })
+    // }
 
-    componentWillMount() {
-        var allCourses = [];
-        axios.get('http://localhost:3050/api/getAllCourses')
-            .then(function (response) {
-                allCourses = response.data
-            })
-            .then(() => {
-                this.setState({
-                    availableCourses: allCourses
-                })
-            })
-    }
+    // handleQuestionChange(eve) {
+    //     var val = eve.target.value;
+    //     this.setState({
+    //         questionBoxValue: val
+    //     })
+    // }
 
-    handleChange1 = (event, index, value1) => this.setState({ value1 });
+    // handleCheckboxChange(eve) {
 
-    handleChange(eve) {
-        var val = eve.target.value
-        this.setState({
-            Optvalue: val
-        })
-    }
+    //     // console.log(eve.target.checked);
 
-    handleQuestionChange(eve) {
-        var val = eve.target.value;
-        this.setState({
-            questionBoxValue: val
-        })
-    }
+    //     if (eve.target.checked === true) {
+    //         this.state.AnsArray.push(eve.target.value)
+    //         // console.log(this.state.AnsArray);
+    //     }
 
-    handleCheckboxChange(eve) {
+    //     if (eve.target.checked === false) {
+    //         var pos = this.state.AnsArray.indexOf(eve.target.value);
+    //         this.state.AnsArray.splice(pos, 1)
+    //         // console.log(this.state.AnsArray);
+    //     }
+    // }
 
-        // console.log(eve.target.checked);
+    // addOpt() {
 
-        if (eve.target.checked === true) {
-            this.state.AnsArray.push(eve.target.value)
-            // console.log(this.state.AnsArray);
-        }
+    //     this.state.OptsArray.push(this.state.Optvalue)
+    //     this.state.Optvalue = ''
+    //     this.forceUpdate();
+    // }
 
-        if (eve.target.checked === false) {
-            var pos = this.state.AnsArray.indexOf(eve.target.value);
-            this.state.AnsArray.splice(pos, 1)
-            // console.log(this.state.AnsArray);
-        }
-    }
+    // removeOpt(index) {
 
-    addOpt() {
+    //     this.state.OptsArray.splice(index, 1);
+    //     this.forceUpdate();
+    // }
 
-        this.state.OptsArray.push(this.state.Optvalue)
-        this.state.Optvalue = ''
-        this.forceUpdate();
-    }
+    // Next() {
 
-    removeOpt(index) {
+    //     if (this.props.QUIZ.quiz === '' || this.props.QUIZ.course_name === '') {
+    //         alert("Add quiz first")
+    //     }
+    //     else {
+    //         this.props.saveThisQuestion({ question: this.state.questionBoxValue, options: this.state.OptsArray, answers: this.state.AnsArray });
+    //         this.setState({
+    //             questionBoxValue: '',
+    //             OptsArray: [],
+    //             AnsArray: []
+    //         })
+    //     }
 
-        this.state.OptsArray.splice(index, 1);
-        this.forceUpdate();
-    }
+    //     console.log(this.props.QUIZ);
+    // }
 
-    Next() {
-
-        if (this.props.QUIZ.quiz === '' || this.props.QUIZ.course_name === '') {
-            alert("Add quiz first")
-        }
-        else {
-            this.props.saveThisQuestion({ question: this.state.questionBoxValue, options: this.state.OptsArray, answers: this.state.AnsArray });
-            this.setState({
-                questionBoxValue: '',
-                OptsArray: [],
-                AnsArray: []
-            })
-        }
-
-        console.log(this.props.QUIZ);
-    }
-
-    Finish() {
-        axios.post('http://localhost:3050/api/makeQuiz', this.props.QUIZ)
-            .then(function (response) {
-                console.log(response.data)
-            })
-            .then(() => {
-                this.props.clear();
-            })
-    }
+    // Finish() {
+    //     axios.post('http://localhost:3050/api/makeQuiz', this.props.QUIZ)
+    //         .then(function (response) {
+    //             console.log(response.data)
+    //         })
+    //         .then(() => {
+    //             this.props.clear();
+    //         })
+    // }
 
     render() {
 
@@ -147,14 +122,14 @@ class MakeMCQS extends React.Component {
                                             <div className="row">
                                                 <div className="col-md-6">
                                                     <div className="widget-five mb30">
-                                                        <textarea rows="5" onChange={this.handleQuestionChange.bind(this)} value={this.state.questionBoxValue} className="form-control resize-v post-area" placeholder="Enter a Question here...."></textarea>
+                                                        <textarea rows="5" onChange={this.props.changeHandler} value={this.props.typedQuestion} className="form-control resize-v post-area" placeholder="Enter a Question here...."></textarea>
                                                         <br />
                                                         <div className="todo-item panel panel-default todo-complete">
                                                             <div className="panel-heading">
                                                                 <h4 className="panel-title">
                                                                     <span role="button" data-toggle="collapse-disabled" data-parent="#accordion" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" className="clickable">
                                                                         <span className="todo-title">
-                                                                            <input value={this.state.Optvalue} onChange={this.handleChange.bind(this)} placeholder='Write Option' style={{ width: '100%' }} id="todo-item-0" />
+                                                                            <input value={this.props.typedOption} onChange={this.props.changeHandler1} placeholder='Write Option' style={{ width: '100%' }} id="todo-item-0" />
                                                                         </span>
                                                                     </span>
                                                                 </h4>
@@ -163,21 +138,21 @@ class MakeMCQS extends React.Component {
                                                         <ul className="post-tools list-unstyled clearfix">
 
                                                             <li className="pull-right">
-                                                                <button onClick={this.addOpt.bind(this)} style={{ backgroundColor: "grey" }} className="btn btn-primary btn-round">Add Option</button>
+                                                                <button onClick={this.props.clickHandler} style={{ backgroundColor: "grey" }} className="btn btn-primary btn-round">Add Option</button>
                                                             </li>
                                                         </ul>
                                                         <table className="table">
                                                             <tbody>
 
-                                                                {this.state.OptsArray.map((OptText, index) => {
+                                                                {this.props.listOfOptions.map((OptText, index) => {
                                                                     return (
                                                                         <tr key={index}>
                                                                             <td>
-                                                                                <input value={OptText} onClick={this.handleCheckboxChange.bind(this)} type="checkbox" name="optionsCheckboxes" />
+                                                                                <input value={OptText} onClick={this.props.checkBoxHandler} type="checkbox" name="optionsCheckboxes" />
                                                                             </td>
                                                                             <td style={{ width: '100%' }} >{OptText}</td>
                                                                             <td className="td-actions text-right">
-                                                                                <button onClick={this.removeOpt.bind(this, index)} type="button" rel="tooltip" title="Remove" className="btn btn-danger btn-simple btn-xs">
+                                                                                <button onClick={this.props.clickHandler1.bind(this, index)} type="button" rel="tooltip" title="Remove" className="btn btn-danger btn-simple btn-xs">
                                                                                     <i className="material-icons">close</i>
                                                                                 </button>
                                                                             </td>
@@ -188,8 +163,8 @@ class MakeMCQS extends React.Component {
                                                             </tbody>
                                                         </table>
 
-                                                        <button style={{ backgroundColor: "Green" }} onClick={this.Next.bind(this)} className="btn btn-primary">Next</button>
-                                                        <button onClick={this.Finish.bind(this)} style={{ float: 'right', marginRight: '8px' }} className="btn btn-primary">Finish</button>
+                                                        <button style={{ backgroundColor: "Green" }} onClick={this.props.clickHandler2} className="btn btn-primary">Next</button>
+                                                        <button onClick={this.props.clickHandler3} style={{ float: 'right', marginRight: '8px' }} className="btn btn-primary">Finish</button>
 
                                                     </div>
                                                 </div>
@@ -205,5 +180,3 @@ class MakeMCQS extends React.Component {
         )
     }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(MakeMCQS);

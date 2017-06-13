@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
-import { Store } from './store/store.js';
+import Store from './store/store.js';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
@@ -14,8 +14,8 @@ import { App } from './containers/app.js';
 import { MainPage } from './containers/mainPage.js';
 
 //** Admin Components **/
-import { Admin } from '../src/containers/adminPanel/admin.js'
-import { AdminLogin } from '../src/components/adminPanel/adminLogin.js'
+import { AdminPanel } from '../src/containers/adminPanel/adminPanel.js'
+import { AdminLogin } from '../src/containers/adminPanel/adminLogin.js'
 import { Dashboard } from '../src/containers/adminPanel/dashboard.js'
 import { CreateQuiz } from '../src/containers/adminPanel/createQuiz.js'
 import { CreateCourse } from '../src/containers/adminPanel/createCourse.js'
@@ -34,7 +34,7 @@ ReactDOM.render(
 
         <Route path='/admin' component={AdminLogin} />
 
-        <Route path='/admin/dashboard' component={Admin}>
+        <Route path='/admin/adminpanel' component={AdminPanel}>
           <IndexRoute component={Dashboard} />
           <Route path='/admin/createProgram' component={CreateProgram} />
           <Route path='/admin/createCourse' component={CreateCourse} />

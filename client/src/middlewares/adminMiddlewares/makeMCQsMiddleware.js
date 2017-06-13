@@ -1,5 +1,5 @@
 import ActionBundle from '../../actions/actionbundle.js';
-import { Store } from '../../store/store.js';
+import Store from '../../store/store.js';
 
 export default class MakeMCQsMiddlware {
 

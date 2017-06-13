@@ -1,67 +1,10 @@
 import React from 'react';
 import '../../../public/assets/css/material-dashboard.css';
-import axios from 'axios';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
-import { Store } from '../../store/store.js';
-import { connect } from 'react-redux';
-import MakeMCQsMiddlware from '../../middlewares/adminMiddlewares/makeMCQsMiddleware'
 
 
-function mapStateToProps(state) {
-    return {
-        QUIZ: state.MakeMCQsReducer
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        saveQuizTitle: (quizTitle, selectedCourse) => { Store.dispatch(MakeMCQsMiddlware.saveQuizName(quizTitle, selectedCourse)) }
-    }
-}
-
-class AddQuiz extends React.Component {
-
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            quizVal: '',
-            availableCourses: [],
-            value1: ''
-        }
-    }
-
-    inputBoxValue(eve) {
-        var val = eve.target.value;
-        this.setState({
-            quizVal: val
-        })
-    }
-
-    componentWillMount() {
-        var allCourses = [];
-        axios.get('http://localhost:3050/api/getAllCourses')
-            .then(function (response) {
-                allCourses = response.data
-            })
-            .then(() => {
-                this.setState({
-                    availableCourses: allCourses
-                })
-            })
-    }
-
-    makeQuizTitle() {
-
-        this.props.saveQuizTitle(this.state.quizVal, this.state.value1)
-        this.setState({
-            quizVal: '',
-            value1: ''
-        })
-    }
-
-    handleChange1 = (event, index, value1) => this.setState({ value1 });
+export default class AddQuiz extends React.Component {
 
     render() {
 
@@ -77,15 +20,15 @@ class AddQuiz extends React.Component {
                             <div className="tab-content">
                                 <div role="tabpanel" className="tab-pane active" id="home">
                                     <div className="form-group  is-empty">
-                                        <input type="text" className="form-control" onChange={this.inputBoxValue.bind(this)} value={this.state.quizVal} placeholder="Quiz Title" />
+                                        <input type="text" className="form-control" onChange={this.props.changeHandler} value={this.props.quizName} placeholder="Quiz Title" />
                                     </div>
                                 </div>
                             </div>
 
                             <label style={{ position: 'relative', bottom: '25px', paddingLeft: '20px' }}>Courses</label>
-                            <DropDownMenu value={this.state.value1} onChange={this.handleChange1} style={{ width: '150px' }}>
+                            <DropDownMenu value={this.props.pickedCourse} onChange={this.props.changeHandler1} style={{ width: '150px' }}>
                                 {
-                                    this.state.availableCourses.map((Cname, index) => {
+                                    this.props.listOfCourse.map((Cname, index) => {
                                         return (
                                             <MenuItem key={index} value={Cname.course} primaryText={Cname.course} />
                                         )
@@ -93,7 +36,7 @@ class AddQuiz extends React.Component {
                                 }
                             </DropDownMenu>
 
-                            <button style={{ backgroundColor: "grey", float: 'right', marginRight:'50px' }} onClick={this.makeQuizTitle.bind(this)} className="btn btn-primary btn-round">Add Quiz</button>
+                            <button style={{ backgroundColor: "grey", float: 'right', marginRight: '50px' }} onClick={this.props.clickHandler} className="btn btn-primary btn-round">Add Quiz</button>
 
                         </div>
                     </div>
@@ -102,4 +45,3 @@ class AddQuiz extends React.Component {
         )
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(AddQuiz);

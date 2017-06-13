@@ -30,4 +30,32 @@ export default class ActionBundle {
             course: selectedCourse
         }
     }
+
+    static allProgramList(ls) {
+        return {
+            type: 'ALLPROGRAMLIST',
+            Plist: ls
+        }
+    }
+
+    static particlarBatches(ls) {
+        return {
+            type: 'PARTICLARBATCHES',
+            PBlist: ls
+        }
+    }
+
+    static allCoursesList(ls){
+        return {
+            type: 'ALLCOURSESLIST',
+            Clist: ls
+        }
+    }
 }
+
+
+
+
+
+
+

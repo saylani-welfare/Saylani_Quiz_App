@@ -17,6 +17,7 @@ const requireLogin = passport.authenticate('local', { session: false })
 
 function routes(app) {
 
+
     //create Admin
     app.post('/api/createAdmin', authentication.createAdmin);
     app.use(ErrMiddleware);

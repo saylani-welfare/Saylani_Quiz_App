@@ -1,17 +1,10 @@
 import React from 'react';
 import '../../../public/assets/css/material-dashboard.css';
-import { Store } from '../../store/store.js';
+import Store from '../../store/store.js';
 import { connect } from 'react-redux';
-import { persistStore } from 'redux-persist';
 import TokenMiddlware from '../../middlewares/adminMiddlewares/tokenMiddleware';
 import { browserHistory } from 'react-router';
 
-
-function mapStateToProps(state) {
-    return {
-        AUTH_TOKEN: state.TokenReducer.auth_token
-    }
-}
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -20,15 +13,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 class Logout extends React.Component {
-
-    componentWillMount() {
-        persistStore(Store, {}, () => {
-            if (this.props.AUTH_TOKEN === '') {
-                browserHistory.push('/admin');
-                // console.log(this.props.AUTH_TOKEN );
-            }
-        });
-    }
 
     logout() {
         this.props.rmTOKEN();
@@ -47,5 +31,5 @@ class Logout extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Logout);
+export default connect(null, mapDispatchToProps)(Logout);
 

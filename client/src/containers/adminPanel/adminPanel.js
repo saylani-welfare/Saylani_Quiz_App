@@ -1,14 +1,32 @@
 
 import React from 'react';
 import '../../../public/assets/css/style.css';
-import Logout from '../../components/adminPanel/logout.js';
 import { Link } from 'react-router';
+import Store from '../../store/store.js';
+import { connect } from 'react-redux';
+import { persistStore } from 'redux-persist';
+import TokenMiddlware from '../../middlewares/adminMiddlewares/tokenMiddleware';
+import { browserHistory } from 'react-router';
 
+function mapStateToProps(state) {
+    return {
+        AUTH_TOKEN: state.TokenReducer.auth_token
+    }
+}
 
-export class Admin extends React.Component {
+class AdminPanelComp extends React.Component {
+
+    componentWillMount() {
+        persistStore(Store, {}, (err, result) => {
+            if (this.props.AUTH_TOKEN === '') {
+                browserHistory.push('/admin');
+                console.log(this.props.AUTH_TOKEN);
+            }
+        });
+    }
 
     render() {
-        //cannot come on this page using browser back button
+        // // //cannot come on this page using browser back button
         (function () {
             function disableBack() { window.history.forward() }
             window.onload = disableBack();
@@ -29,7 +47,7 @@ export class Admin extends React.Component {
                     <div className="sidebar-wrapper">
                         <ul className="nav">
                             <li>
-                                <Link to={{ pathname: '/admin/dashboard' }}>
+                                <Link to={{ pathname: '/admin/adminpanel' }}>
                                     <i className="fa fa-circle"></i>
                                     <p>Dashboard</p>
                                 </Link>
@@ -75,4 +93,4 @@ export class Admin extends React.Component {
     }
 }
 
-
+export const AdminPanel = connect(mapStateToProps, null)(AdminPanelComp)

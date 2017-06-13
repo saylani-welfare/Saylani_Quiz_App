@@ -6,6 +6,7 @@ const Programs = require('../models/programs');
 module.exports = {
 
     getAllPrograms(req, res, next) {
+      
         Programs.find()
             .then((allPrograms) => { res.send(allPrograms) })
             .catch(next)

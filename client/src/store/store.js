@@ -4,18 +4,23 @@ import { persistStore, autoRehydrate } from 'redux-persist';
 import thunk from 'redux-thunk';
 import TokenReducer from '../store/reducers/adminReducers/tokenReducer';
 import MakeMCQsReducer from '../store/reducers/adminReducers/makeMCQsReducer';
+import AsyncReducer from '../store/reducers/adminReducers/asyncReducer';
+
 
 const rootReducer = combineReducers({
     TokenReducer,
-    MakeMCQsReducer
+    MakeMCQsReducer,
+    AsyncReducer
 })
 
-export const Store = compose(
+const Store = compose(
     applyMiddleware(thunk),
     autoRehydrate()
 )(createStore)(rootReducer)
 
-persistStore(Store, {});
+// const Store = createStore(rootReducer, undefined, compose(applyMiddleware(thunk), autoRehydrate()));
 
-// store = createStore(rootReducer, applyMiddleware(thunk));
-// export const store
+persistStore(Store);
+
+export default Store
+
