@@ -12,9 +12,12 @@ import {
   deepOrange300,
   pink400,
   purple500,
+  white
 } from 'material-ui/styles/colors';
 
-const style = {margin: 5};
+const style = {marginLeft: 70}
+                
+;
 
 /**
  * Examples of `Avatar` using an image, [Font Icon](/#/components/font-icon), [SVG Icon](/#/components/svg-icon)
@@ -22,20 +25,13 @@ const style = {margin: 5};
  */
 const AvatarExampleSimple = () => (
   <List>
-   
-    
-     
-    
-   
-   
-   
     <ListItem
       disabled={true}
       leftAvatar={
         <Avatar
-          color={deepOrange300}
-          backgroundColor={purple500}
-          size={30}
+          color={purple500}
+          backgroundColor={white}
+          size={60}
           style={style}
         >
           S

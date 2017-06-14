@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { persistStore } from 'redux-persist';
 import TokenMiddlware from '../../middlewares/adminMiddlewares/tokenMiddleware';
 import { browserHistory } from 'react-router';
-// import Fblogin from '../images/fblogin.png';
+import fblogin from './images/fblogin.png';
 
 function mapStateToProps(state) {
     return {
@@ -38,7 +38,8 @@ class Logout extends React.Component {
     loginwithFb(){
         return(
             <div>
-                <button> loginwithFb</button>
+                {/*<button> loginwithFb</button>*/}
+                <img src={fblogin} style={{width:200,height:50}}/>
             </div>
         )
     }
