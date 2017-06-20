@@ -4,18 +4,32 @@
 1 verbose cli   'start' ]
 2 info using npm@4.1.2
 3 info using node@v7.5.0
+<<<<<<< HEAD
 4 verbose stack Error: ENOENT: no such file or directory, open 'E:\Saylani softwareHous\nazeer\studentPanelquizApp\package.json'
 5 verbose cwd E:\Saylani softwareHous\nazeer\studentPanelquizApp
+=======
+4 verbose stack Error: ENOENT: no such file or directory, open 'E:\Saylani softwareHous\nazeer\Saylani_Quiz_App\package.json'
+5 verbose cwd E:\Saylani softwareHous\nazeer\Saylani_Quiz_App
+>>>>>>> 3dda1f4fc3f1d346d7b749e4d430f8c121e68dff
 6 error Windows_NT 6.3.9600
 7 error argv "C:\\Program Files\\node.exe" "C:\\Program Files\\node_modules\\npm\\bin\\npm-cli.js" "start"
 8 error node v7.5.0
 9 error npm  v4.1.2
+<<<<<<< HEAD
 10 error path E:\Saylani softwareHous\nazeer\studentPanelquizApp\package.json
 11 error code ENOENT
 12 error errno -4058
 13 error syscall open
 14 error enoent ENOENT: no such file or directory, open 'E:\Saylani softwareHous\nazeer\studentPanelquizApp\package.json'
 15 error enoent ENOENT: no such file or directory, open 'E:\Saylani softwareHous\nazeer\studentPanelquizApp\package.json'
+=======
+10 error path E:\Saylani softwareHous\nazeer\Saylani_Quiz_App\package.json
+11 error code ENOENT
+12 error errno -4058
+13 error syscall open
+14 error enoent ENOENT: no such file or directory, open 'E:\Saylani softwareHous\nazeer\Saylani_Quiz_App\package.json'
+15 error enoent ENOENT: no such file or directory, open 'E:\Saylani softwareHous\nazeer\Saylani_Quiz_App\package.json'
+>>>>>>> 3dda1f4fc3f1d346d7b749e4d430f8c121e68dff
 15 error enoent This is most likely not a problem with npm itself
 15 error enoent and is related to npm not being able to find a file.
 16 verbose exit [ -4058, true ]
