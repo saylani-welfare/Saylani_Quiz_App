@@ -7,7 +7,6 @@ const cors = require('cors');
 mongoose.Promise = global.Promise;
 
 mongoose.connect("mongodb://localhost/QuizAppDB");
-
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import { persistStore } from 'redux-persist';
 import TokenMiddlware from '../../middlewares/adminMiddlewares/tokenMiddleware';
 import { browserHistory } from 'react-router';
-// import Fblogin from '../images/fblogin.png';
+import fblogin from './images/fblogin.png';
+import axios from 'axios';
 
 function mapStateToProps(state) {
     return {
@@ -36,20 +37,24 @@ class Logout extends React.Component {
         browserHistory.push('/admin');
     }
     loginwithFb(){
-        return(
-            <div>
-                <button> loginwithFb</button>
-            </div>
-        )
+       
+    //    axios.get('http://localhost:3050/auth/facebook')
+    //         .then((res, err) => {
+    //             this.setState({
+    //                 program: res.data
+    //             })
+    //         })
     }
 
     render() {
         return (
             <div className="collapse navbar-collapse">
-                <ul className="nav navbar-nav navbar-right">
-                    {/*<button onClick={this.logout.bind(this)} className="btn btn-primary btn-round">Logout</button>*/}
-                    {this.loginwithFb()} 
-                </ul>
+                {/*<ul className="nav navbar-nav navbar-right">
+                    <button onClick={this.logout.bind(this)} className="btn btn-primary btn-round">Logout</button>
+                    <img src={fblogin} style={{width:300,height:70}} className="img-responsive"/>
+                    <img className="img-responsive" src={fblogin} alt="quiz" style={{width:"100px"}} />
+                </ul>*/}
+                
 
             </div>
         )

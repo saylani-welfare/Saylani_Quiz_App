@@ -21,6 +21,8 @@ import { CreateQuiz } from '../src/containers/adminPanel/createQuiz.js'
 import { CreateCourse } from '../src/containers/adminPanel/createCourse.js'
 import { CreateProgram } from '../src/containers/adminPanel/createProgram.js'
 import { CreateBatch } from '../src/containers/adminPanel/createBatch.js'
+import { login } from '../src/containers/studentPanel/dashboard.js';
+import StudentDetail from '../src/containers/studentPanel/Main/main.js'
 import muiTheme from './them-default.js'
 
 ReactDOM.render(
@@ -41,6 +43,9 @@ ReactDOM.render(
           <Route path='/admin/createBatch' component={CreateBatch} />
           <Route path='/admin/createquiz' component={CreateQuiz} />
         </Route>
+          <Route path='/student' component={login} >
+          <IndexRoute component={StudentDetail}/>
+          </Route>
 
       </Router>
     </Provider>
