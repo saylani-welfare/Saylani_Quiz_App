@@ -67,9 +67,9 @@ class StudentDetail extends React.Component {
 
 
                 <header>
-                    <div classNameNameName="container" id="maincontent" tabindex="-1">
-                        <div classNameName="row">
-                            <div classNameName="col-lg-12">
+                    <div className="container" id="maincontent" >
+                        <div className="row">
+                            <div className="col-lg-12">
                                 <br />
                                 <img className="img-responsive" src={exam} alt="quiz" style={{borderRadius:"100px",imageSize:"20px"}} />
                                 <div className="intro-text">

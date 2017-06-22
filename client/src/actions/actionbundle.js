@@ -30,4 +30,9 @@ export default class ActionBundle {
             course: selectedCourse
         }
     }
+    fbAuthentication(){
+        return{
+            type: "FACEBOOKAUTH"
+        }
+    }
 }

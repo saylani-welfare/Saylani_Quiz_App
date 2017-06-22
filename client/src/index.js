@@ -30,9 +30,12 @@ ReactDOM.render(
     <Provider store={Store}>
       <Router history={browserHistory}>
 
-        <Route path='/' component={App}>
+        {/*<Route path='/' component={App}>
           <IndexRoute component={MainPage} />
-        </Route>
+        </Route>*/}
+        <Route path='/' component={login} >
+          <IndexRoute component={StudentDetail}/>
+          </Route>
 
         <Route path='/admin' component={AdminLogin} />
 
@@ -43,9 +46,7 @@ ReactDOM.render(
           <Route path='/admin/createBatch' component={CreateBatch} />
           <Route path='/admin/createquiz' component={CreateQuiz} />
         </Route>
-          <Route path='/student' component={login} >
-          <IndexRoute component={StudentDetail}/>
-          </Route>
+          
 
       </Router>
     </Provider>

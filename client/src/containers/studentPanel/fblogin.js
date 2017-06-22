@@ -6,6 +6,7 @@ import { persistStore } from 'redux-persist';
 import TokenMiddlware from '../../middlewares/adminMiddlewares/tokenMiddleware';
 import { browserHistory } from 'react-router';
 import fblogin from './images/fblogin.png';
+import { FacebookLogin } from 'react-facebook-login-component';
 import axios from 'axios';
 
 function mapStateToProps(state) {
@@ -37,6 +38,18 @@ class Logout extends React.Component {
         browserHistory.push('/admin');
     }
     loginwithFb(){
+        
+         axios.post('http://localhost:3000/v1/facebook_auth').then((response) => {
+        // var token = response.data.token;
+        
+        });
+      }
+      
+    
+
+
+
+
        
     //    axios.get('http://localhost:3050/auth/facebook')
     //         .then((res, err) => {
@@ -44,7 +57,7 @@ class Logout extends React.Component {
     //                 program: res.data
     //             })
     //         })
-    }
+    
 
     render() {
         return (
@@ -55,7 +68,7 @@ class Logout extends React.Component {
                     <img className="img-responsive" src={fblogin} alt="quiz" style={{width:"100px"}} />
                 </ul>*/}
                 
-
+<button onClick={this.fblogin.bind(this)}>Login with fb</button>
             </div>
         )
     }
